@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menuProfile"
+        android:icon="@drawable/profile"
+        android:title="@string/profile" />
+
+    <item
+        android:id="@+id/menuNotification"
+        android:icon="@drawable/horario"
+        android:title="@string/horario" />
+
+    <item
+        android:id="@+id/menuCollection"
+        android:icon="@drawable/examenes"
+        android:title="@string/examenes" />
+
+    <item
+        android:id="@+id/menuInbox"
+        android:icon="@drawable/inbox"
+        android:title="@string/inbox" />
+
+    <item
+        android:id="@+id/menuCalendario"
+        android:icon="@drawable/calendario"
+        android:title="@string/calendario" />
+
+    <item
+        android:id="@+id/menuOrders"
+        android:icon="@drawable/otros"
+        android:title="@string/orders" />
+
+    <item android:title="@string/orders">
+
+        <menu>
+            <item
+                android:id="@+id/menuSettings"
+                android:icon="@drawable/settings"
+                android:title="@string/settings" />
+
+            <item
+                android:id="@+id/menuAboutUs"
+                android:icon="@drawable/about"
+                android:title="@string/about_us" />
+        </menu>
+
+    </item>
+
+
+
+</menu>
