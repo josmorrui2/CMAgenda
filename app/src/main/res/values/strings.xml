@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">CMAgenda</string>
+    <string name="inbox">Inbox</string>
+    <string name="collections">collections</string>
+    <string name="notifications">notifications</string>
+    <string name="profile">profile</string>
+    <string name="orders">orders</string>
+    <string name="settings">Settings</string>
+    <string name="support">support</string>
+    <string name="about_us">about_us</string>
+    <string name="horario">horario</string>
+    <string name="examenes">examenes</string>
+    <string name="calendario">calendario</string>
+    <string name="homer_simpson">Homer Simpson</string>
+    <string name="verificado">verificado</string>
 </resources>
