@@ -3,7 +3,7 @@
     <string name="password">password</string>
     <string name="passwordLogin">Contraseña</string>
     <string name="usuario">Usuario</string>
-    <string name="tittle_login">tittle_login</string>
+    <string name="tittle_login">Inicio Sesión</string>
     <string name="login">login</string>
     <string name="nombre">nombre</string>
     <string name="apellidos">apellidos</string>
