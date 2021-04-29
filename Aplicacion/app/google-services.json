@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "780699173363",
+    "project_id": "fir-agenda-94487",
+    "storage_bucket": "fir-agenda-94487.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:780699173363:android:76a3429005a5144b411286",
+        "android_client_info": {
+          "package_name": "com.example.aplicacion"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "780699173363-eeuss04usdb0k3irnh9b0o1lgahfnicn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.aplicacion",
+            "certificate_hash": "226454ed003aaf079d50bedbcd455ecf85f64948"
+          }
+        },
+        {
+          "client_id": "780699173363-tar38dhdn5ar44chi3k6sp76rgd76mg4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBUcH16gncpugZWW3ltTz1ExJanA6hXnsQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "780699173363-tar38dhdn5ar44chi3k6sp76rgd76mg4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

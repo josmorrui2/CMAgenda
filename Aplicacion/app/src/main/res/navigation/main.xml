@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    app:startDestination="@id/menuPerfil">
+
+    <fragment
+        android:id="@+id/menuPerfil"
+        android:name="com.example.aplicacion.PerfilFragmento"
+        android:label="Perfil"
+        tools:layout="@layout/fragment_perfil_fragmento" />
+    <fragment
+        android:id="@+id/menuExamenes"
+        android:name="com.example.aplicacion.ExamenesFragmento"
+        android:label="Examenes"
+        tools:layout="@layout/fragment_examenes_fragmento" />
+    <fragment
+        android:id="@+id/menuHorario"
+        android:name="com.example.aplicacion.HorariosFragmento"
+        android:label="Horarios"
+        tools:layout="@layout/fragment_horarios_fragmento" />
+</navigation>

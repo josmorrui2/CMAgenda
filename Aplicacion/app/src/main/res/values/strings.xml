@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">Aplicación</string>
+    <string name="password">password</string>
+    <string name="passwordLogin">Contraseña</string>
+    <string name="usuario">Usuario</string>
+    <string name="tittle_login">Iniciar Sesión</string>
+    <string name="login">login</string>
+    <string name="nombre">nombre</string>
+    <string name="apellidos">apellidos</string>
+    <string name="email">email</string>
+    <string name="RepitePassword">Repite Password</string>
+    <string name="FechaNacimiento">Fecha de nacimiento</string>
+    <string name="Registrarme">GO!</string>
+    <string name="signUpButton">Registrarme</string>
+
+    <string name="perfil">perfil</string>
+    <string name="horario">Horario</string>
+    <string name="examenes">Examenes</string>
+    <string name="correo">Correo</string>
+    <string name="calendario">Calendario</string>
+    <string name="otros">Otros</string>
+    <string name="ajustes">Ajustes</string>
+    <string name="sobre_nosotros">Sobre nosotros</string>
+    <string name="homer_simpson">Homer_simpson</string>
+    <string name="conectado">Conectado</string>
+</resources>
