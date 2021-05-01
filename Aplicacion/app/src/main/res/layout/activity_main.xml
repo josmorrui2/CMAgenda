@@ -61,7 +61,7 @@
         android:textColor="#67787E"
         android:textColorHighlight="#DAC4C4"
         android:textSize="24sp"
-        tools:text="Usuario" />
+        tools:text="@string/email" />
 
     <EditText
         android:id="@+id/password"
@@ -132,6 +132,28 @@
         android:textColor="#67787E"
         android:textSize="18sp"
         android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/restableceContraseña"
+        android:layout_width="183dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/signUpButton"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginStart="131dp"
+        android:layout_marginLeft="131dp"
+        android:layout_marginTop="51dp"
+        android:layout_marginEnd="97dp"
+        android:layout_marginRight="97dp"
+        android:gravity="center_horizontal"
+        android:text="Restablecer contraseña?"
+        android:textColor="@color/colorAccent"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintVertical_bias="0.19999999" />
 
 
 </RelativeLayout>

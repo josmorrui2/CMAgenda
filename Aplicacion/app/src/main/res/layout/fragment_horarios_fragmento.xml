@@ -7,10 +7,11 @@
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
+        android:id="@+id/mHorario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/horario"
         android:layout_gravity="center"
-        android:textSize="20sp"/>
+        android:text="@string/horario"
+        android:textSize="20sp" />
 
 </FrameLayout>

@@ -1,11 +1,33 @@
 package com.example.aplicacion;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.model.Document;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
+import java.util.concurrent.Executor;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -14,6 +36,16 @@ import androidx.fragment.app.Fragment;
  */
 public class HorariosFragmento extends Fragment {
 
+    FirebaseAuth fAuth;
+    FirebaseFirestore fStore;
+    FirebaseUser user;
+    DatabaseReference mDatabase;
+    StorageReference storageReference;
+    String userId;
+    String res;
+    TextView frag;
+    String auxiliar = "";
+    //Task<Void> nomb;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -52,6 +84,23 @@ public class HorariosFragmento extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        fAuth = FirebaseAuth.getInstance();
+        fStore = FirebaseFirestore.getInstance();
+        storageReference = FirebaseStorage.getInstance().getReference();
+        userId = fAuth.getCurrentUser().getUid();
+        user = fAuth.getCurrentUser();
+        frag = (TextView) getActivity().findViewById(R.id.mHorario);
+        //res = consulta("nombre");
+        DocumentReference documentReference = fStore.collection("Users").document(userId);
+        //consulta("nombre");
+        //String res = consulta("nombre");
+        //nomb = mDatabase.child("Users").child(userId).child("nombre").setValue("pepe");
+        //Log.d("valor2", frag.getText().toString());
+
+        consulta("nombre");
+
+
+
     }
 
     @Override
@@ -60,4 +109,27 @@ public class HorariosFragmento extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_horarios_fragmento, container, false);
     }
+
+
+
+    public void consulta(String clave){
+
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        mDatabase.child("Users").child(userId).child(clave).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                Log.d("valor1", String.valueOf(task.getResult().getValue()));
+                auxiliar = String.valueOf(task.getResult().getValue());
+                Log.d("valor2", auxiliar);
+            }
+
+        });
+        String per = auxiliar;
+        Log.d("valor2", per);
+
+    }
+
 }
+
+
+//nomb = mDatabase.child("Users").child(userId).child("nombre").setValue("nombre1"); ACTUALIZAR
