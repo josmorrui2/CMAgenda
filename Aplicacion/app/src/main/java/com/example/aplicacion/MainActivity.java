@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -56,7 +57,14 @@ public class MainActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
 
                             if(task.isSuccessful()){
-                                startActivity(new Intent(MainActivity.this, InicioActivity.class));
+                                Bundle extras = new Bundle();
+                                extras.putString("EMAIL",email);
+                                extras.putString("NOMBRE", "nombre");
+                                Intent intent = new Intent(MainActivity.this, InicioActivity.class);
+                                intent.putExtras(extras);
+
+                                //startActivity(new Intent(MainActivity.this, InicioActivity.class));
+                                startActivity(intent);
                                 finish();
                             }else{
                                 Toast.makeText(MainActivity.this, "No se pudo iniciar sesión", Toast.LENGTH_SHORT).show();

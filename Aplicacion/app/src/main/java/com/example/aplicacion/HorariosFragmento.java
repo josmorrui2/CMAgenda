@@ -35,7 +35,7 @@ import java.util.concurrent.Executor;
  * create an instance of this fragment.
  */
 public class HorariosFragmento extends Fragment {
-
+    private static String PARAMETRO = "";
     FirebaseAuth fAuth;
     FirebaseFirestore fStore;
     FirebaseUser user;
@@ -44,7 +44,7 @@ public class HorariosFragmento extends Fragment {
     String userId;
     String res;
     TextView frag;
-    String auxiliar = "";
+
     //Task<Void> nomb;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -89,7 +89,7 @@ public class HorariosFragmento extends Fragment {
         storageReference = FirebaseStorage.getInstance().getReference();
         userId = fAuth.getCurrentUser().getUid();
         user = fAuth.getCurrentUser();
-        frag = (TextView) getActivity().findViewById(R.id.mHorario);
+
         //res = consulta("nombre");
         DocumentReference documentReference = fStore.collection("Users").document(userId);
         //consulta("nombre");
@@ -100,14 +100,14 @@ public class HorariosFragmento extends Fragment {
         consulta("nombre");
 
 
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_horarios_fragmento, container, false);
+        View principal =  inflater.inflate(R.layout.fragment_horarios_fragmento, container, false);
+        return principal;
     }
 
 
@@ -118,14 +118,17 @@ public class HorariosFragmento extends Fragment {
         mDatabase.child("Users").child(userId).child(clave).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
+                frag = (TextView) getActivity().findViewById(R.id.mHorario);
                 Log.d("valor1", String.valueOf(task.getResult().getValue()));
-                auxiliar = String.valueOf(task.getResult().getValue());
-                Log.d("valor2", auxiliar);
+                PARAMETRO = String.valueOf(task.getResult().getValue());
+                Log.d("valor2", PARAMETRO);
+                frag.setText(PARAMETRO);
+                Log.d("valor4", frag.getText().toString());
             }
 
         });
-        String per = auxiliar;
-        Log.d("valor2", per);
+        String per = PARAMETRO;
+        Log.d("valor3", per);
 
     }
 
