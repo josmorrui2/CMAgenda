@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/fragAjus"
+    android:background="@color/colorWhite"
     tools:context=".AjustesFragmento">
 
     <!-- TODO: Update blank fragment layout -->
@@ -20,6 +21,7 @@
         android:layout_marginLeft="27dp"
         android:layout_marginEnd="27dp"
         android:layout_marginRight="27dp"
+        android:layout_marginTop="20dp"
         android:fontFamily="@font/bad_script"
         android:gravity="center"
         android:shadowColor="#67787E"
@@ -30,9 +32,9 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Display3"
         android:textColor="#FAF4F4"
         android:textSize="36sp"
-        android:textStyle="bold"
-        tools:text="Editar Perfil" />
+        android:textStyle="bold"/>
 
+    <!--NOMBRE-->
     <TextView
         android:id="@+id/textnombre"
         android:layout_width="111dp"
@@ -40,33 +42,43 @@
         android:layout_below="@id/cambiarDatos"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="17dp"
+        android:layout_marginTop="50dp"
         android:layout_marginEnd="243dp"
         android:layout_marginRight="243dp"
-        android:autofillHints="Nombre"
-        android:background="#8FD8EBF4"
-        android:ems="10"
         android:fontFamily="sans-serif-condensed-medium"
         android:gravity="center"
-        android:hint="@string/nombre"
-        android:inputType="textPersonName"
         android:text="Nombre"
-        android:textColor="#67787E"
-        android:textColorHighlight="#8FD8EBF4"
-        android:textSize="14sp"
-        tools:ignore="LabelFor" />
+        android:textColor="@color/colorPrimaryText"
+        android:textSize="12sp"/>
 
-    <EditText
-        android:id="@+id/nombre"
+    <TextView
+        android:id="@+id/mantenerNombre"
         android:layout_width="111dp"
         android:layout_height="56dp"
         android:layout_below="@id/cambiarDatos"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="17dp"
+        android:layout_marginTop="50dp"
         android:layout_marginEnd="114dp"
         android:layout_marginRight="114dp"
-        android:autofillHints="Nombre"
+        android:background="#9c9c9c"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:gravity="center"
+        android:text="@string/nombre"
+        android:textColor="@color/colorPrimaryText"
+        android:textSize="12sp"
+        android:visibility="visible"/>
+
+    <EditText
+        android:id="@+id/editarNombre"
+        android:layout_width="111dp"
+        android:layout_height="56dp"
+        android:layout_below="@id/cambiarDatos"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="114dp"
+        android:layout_marginRight="114dp"
         android:background="#8FD8EBF4"
         android:ems="10"
         android:fontFamily="sans-serif-condensed-medium"
@@ -75,8 +87,25 @@
         android:inputType="textPersonName"
         android:textColor="#67787E"
         android:textColorHighlight="#8FD8EBF4"
-        android:textSize="24sp"
+        android:textSize="12sp"
+        android:visibility="invisible"
         tools:ignore="LabelFor" />
+
+    <ImageButton
+        android:id="@+id/botonGuardarNombre"
+        android:layout_width="80dp"
+        android:layout_height="56dp"
+        android:layout_below="@id/cambiarDatos"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="22dp"
+        android:layout_marginRight="22dp"
+        android:visibility="invisible"
+        android:background="@color/colorWhite"
+        android:src="@drawable/btguardar">
+
+    </ImageButton>
 
     <ImageButton
         android:id="@+id/botonEditarNombre"
@@ -85,15 +114,18 @@
         android:layout_below="@id/cambiarDatos"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="17dp"
+        android:layout_marginTop="50dp"
         android:layout_marginEnd="22dp"
         android:layout_marginRight="22dp"
         android:textColor="@android:color/white"
         android:textSize="16sp"
-        android:text="@string/editar">
+        android:visibility="visible"
+        android:background="@color/colorWhite"
+        android:src="@drawable/editicon">
 
     </ImageButton>
 
+    <!--APELLIDOS-->
     <TextView
         android:id="@+id/textApellidos"
         android:layout_width="111dp"
@@ -104,28 +136,39 @@
         android:layout_alignEnd="@+id/textnombre"
         android:layout_alignRight="@+id/textnombre"
         android:layout_marginTop="15dp"
-        android:autofillHints="Nombre"
-        android:background="#8FD8EBF4"
-        android:ems="10"
         android:fontFamily="sans-serif-condensed-medium"
         android:gravity="center"
-        android:hint="@string/nombre"
-        android:inputType="textPersonName"
         android:text="Apellidos"
-        android:textColor="#67787E"
-        android:textColorHighlight="#8FD8EBF4"
-        android:textSize="14sp"
-        tools:ignore="LabelFor"  />
+        android:textColor="@color/colorPrimaryText"
+        android:textSize="12sp"  />
 
-    <EditText
-        android:id="@+id/apellidos"
+    <TextView
+        android:id="@+id/mantenerApellidos"
         android:layout_width="111dp"
         android:layout_height="56dp"
-        android:layout_below="@id/nombre"
-        android:layout_alignStart="@+id/nombre"
-        android:layout_alignLeft="@+id/nombre"
-        android:layout_alignEnd="@+id/nombre"
-        android:layout_alignRight="@+id/nombre"
+        android:layout_below="@id/mantenerNombre"
+        android:layout_alignStart="@+id/mantenerNombre"
+        android:layout_alignLeft="@+id/mantenerNombre"
+        android:layout_alignEnd="@+id/mantenerNombre"
+        android:layout_alignRight="@+id/mantenerNombre"
+        android:layout_marginTop="15dp"
+        android:background="#9c9c9c"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:gravity="center"
+        android:text="@string/apellidos"
+        android:textColor="@color/colorPrimaryText"
+        android:textSize="12sp"
+        android:visibility="visible" />
+
+    <EditText
+        android:id="@+id/editarApellidos"
+        android:layout_width="111dp"
+        android:layout_height="56dp"
+        android:layout_below="@id/editarNombre"
+        android:layout_alignStart="@+id/editarNombre"
+        android:layout_alignLeft="@+id/editarNombre"
+        android:layout_alignEnd="@+id/editarNombre"
+        android:layout_alignRight="@+id/editarNombre"
         android:layout_marginTop="15dp"
         android:autofillHints="apellidos"
         android:background="#8FD8EBF4"
@@ -136,9 +179,43 @@
         android:inputType="text"
         android:textColor="#67787E"
         android:textColorHighlight="#DAC4C4"
-        android:textSize="24sp"
+        android:textSize="12sp"
+        android:visibility="invisible"
         tools:ignore="LabelFor" />
 
+    <ImageButton
+        android:id="@+id/botonGuardarApellidos"
+        android:layout_width="80dp"
+        android:layout_height="56dp"
+        android:layout_below="@id/botonGuardarNombre"
+        android:layout_alignStart="@+id/botonGuardarNombre"
+        android:layout_alignLeft="@+id/botonGuardarNombre"
+        android:layout_alignEnd="@+id/botonGuardarNombre"
+        android:layout_alignRight="@+id/botonGuardarNombre"
+        android:layout_marginTop="15dp"
+        android:visibility="invisible"
+        android:background="@color/colorWhite"
+        android:src="@drawable/btguardar">
+
+    </ImageButton>
+
+    <ImageButton
+        android:id="@+id/botonEditarApellidos"
+        android:layout_width="80dp"
+        android:layout_height="56dp"
+        android:layout_below="@id/botonEditarNombre"
+        android:layout_alignStart="@+id/botonEditarNombre"
+        android:layout_alignLeft="@+id/botonEditarNombre"
+        android:layout_alignEnd="@+id/botonEditarNombre"
+        android:layout_alignRight="@+id/botonEditarNombre"
+        android:layout_marginTop="15dp"
+        android:visibility="visible"
+        android:background="@color/colorWhite"
+        android:src="@drawable/editicon">
+
+    </ImageButton>
+
+    <!--EMAIL-->
     <TextView
         android:id="@+id/textEmail"
         android:layout_width="111dp"
@@ -149,28 +226,39 @@
         android:layout_alignEnd="@+id/textApellidos"
         android:layout_alignRight="@+id/textApellidos"
         android:layout_marginTop="15dp"
-        android:autofillHints="Nombre"
-        android:background="#8FD8EBF4"
-        android:ems="10"
         android:fontFamily="sans-serif-condensed-medium"
         android:gravity="center"
-        android:hint="@string/nombre"
-        android:inputType="textPersonName"
         android:text="Email"
-        android:textColor="#67787E"
-        android:textColorHighlight="#8FD8EBF4"
-        android:textSize="14sp"
-        tools:ignore="LabelFor"  />
+        android:textColor="@color/colorPrimaryText"
+        android:textSize="12sp" />
 
-    <EditText
-        android:id="@+id/email"
+    <TextView
+        android:id="@+id/mantenerEmail"
         android:layout_width="111dp"
         android:layout_height="56dp"
-        android:layout_below="@id/apellidos"
-        android:layout_alignStart="@+id/apellidos"
-        android:layout_alignLeft="@+id/apellidos"
-        android:layout_alignEnd="@+id/apellidos"
-        android:layout_alignRight="@+id/apellidos"
+        android:layout_below="@id/mantenerApellidos"
+        android:layout_alignStart="@+id/mantenerApellidos"
+        android:layout_alignLeft="@+id/mantenerApellidos"
+        android:layout_alignEnd="@+id/mantenerApellidos"
+        android:layout_alignRight="@+id/mantenerApellidos"
+        android:layout_marginTop="15dp"
+        android:background="#9c9c9c"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:gravity="center"
+        android:text="@string/email"
+        android:textColor="@color/colorPrimaryText"
+        android:textSize="12sp"
+        android:visibility="visible"/>
+
+    <EditText
+        android:id="@+id/editarEmail"
+        android:layout_width="111dp"
+        android:layout_height="56dp"
+        android:layout_below="@id/editarApellidos"
+        android:layout_alignStart="@+id/editarApellidos"
+        android:layout_alignLeft="@+id/editarApellidos"
+        android:layout_alignEnd="@+id/editarApellidos"
+        android:layout_alignRight="@+id/editarApellidos"
         android:layout_marginTop="15dp"
         android:autofillHints="email"
         android:background="#8FD8EBF4"
@@ -182,9 +270,44 @@
         android:labelFor="@id/email"
         android:textColor="#67787E"
         android:textColorHighlight="#DAC4C4"
-        android:textSize="24sp"
+        android:textSize="12sp"
+        android:visibility="invisible"
         tools:ignore="LabelFor" />
 
+    <ImageButton
+        android:id="@+id/botonGuardarEmail"
+        android:layout_width="80dp"
+        android:layout_height="56dp"
+        android:layout_below="@id/botonGuardarApellidos"
+        android:layout_alignStart="@+id/botonGuardarApellidos"
+        android:layout_alignLeft="@+id/botonGuardarApellidos"
+        android:layout_alignEnd="@+id/botonGuardarApellidos"
+        android:layout_alignRight="@+id/botonGuardarApellidos"
+        android:layout_marginTop="15dp"
+        android:visibility="invisible"
+        android:background="@color/colorWhite"
+        android:src="@drawable/btguardar">
+
+    </ImageButton>
+
+    <ImageButton
+        android:id="@+id/botonEditarEmail"
+        android:layout_width="80dp"
+        android:layout_height="56dp"
+        android:layout_below="@id/botonEditarApellidos"
+        android:layout_alignStart="@+id/botonEditarApellidos"
+        android:layout_alignLeft="@+id/botonEditarApellidos"
+        android:layout_alignEnd="@+id/botonEditarApellidos"
+        android:layout_alignRight="@+id/botonEditarApellidos"
+        android:layout_marginTop="15dp"
+        android:visibility="visible"
+        android:background="@color/colorWhite"
+        android:src="@drawable/editicon">
+
+    </ImageButton>
+
+
+    <!--Fecha de Nacimiento-->
     <TextView
         android:id="@+id/textFecha"
         android:layout_width="111dp"
@@ -195,28 +318,39 @@
         android:layout_alignEnd="@+id/textEmail"
         android:layout_alignRight="@+id/textEmail"
         android:layout_marginTop="15dp"
-        android:autofillHints="Nombre"
-        android:background="#8FD8EBF4"
-        android:ems="10"
         android:fontFamily="sans-serif-condensed-medium"
         android:gravity="center"
-        android:hint="@string/nombre"
-        android:inputType="textPersonName"
         android:text="Fecha de Nacimiento"
-        android:textColor="#67787E"
-        android:textColorHighlight="#8FD8EBF4"
-        android:textSize="14sp"
-        tools:ignore="LabelFor" />
+        android:textColor="@color/colorPrimaryText"
+        android:textSize="12sp" />
 
-    <EditText
-        android:id="@+id/fechaNacimiento"
+    <TextView
+        android:id="@+id/mantenerFechaNacimiento"
         android:layout_width="111dp"
         android:layout_height="56dp"
-        android:layout_below="@id/email"
-        android:layout_alignStart="@+id/email"
-        android:layout_alignLeft="@+id/email"
-        android:layout_alignEnd="@+id/email"
-        android:layout_alignRight="@+id/email"
+        android:layout_below="@id/mantenerEmail"
+        android:layout_alignStart="@+id/mantenerEmail"
+        android:layout_alignLeft="@+id/mantenerEmail"
+        android:layout_alignEnd="@+id/mantenerEmail"
+        android:layout_alignRight="@+id/mantenerEmail"
+        android:layout_marginTop="15dp"
+        android:background="#9c9c9c"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:gravity="center"
+        android:text="@string/FechaNacimiento"
+        android:textColor="@color/colorPrimaryText"
+        android:textSize="12sp"
+        android:visibility="visible" />
+
+    <EditText
+        android:id="@+id/editarFechaNacimiento"
+        android:layout_width="111dp"
+        android:layout_height="56dp"
+        android:layout_below="@id/editarEmail"
+        android:layout_alignStart="@+id/editarEmail"
+        android:layout_alignLeft="@+id/editarEmail"
+        android:layout_alignEnd="@+id/editarEmail"
+        android:layout_alignRight="@+id/editarEmail"
         android:layout_marginTop="15dp"
         android:autofillHints="fechaNacimiento"
         android:background="#8FD8EBF4"
@@ -229,7 +363,40 @@
         android:inputType="date"
         android:textColor="#67787E"
         android:textColorHighlight="#DAC4C4"
-        android:textSize="24sp"
+        android:textSize="12sp"
+        android:visibility="invisible"
         tools:ignore="LabelFor" />
+
+    <ImageButton
+        android:id="@+id/botonGuardarFecha"
+        android:layout_width="80dp"
+        android:layout_height="56dp"
+        android:layout_below="@id/botonGuardarEmail"
+        android:layout_alignStart="@+id/botonGuardarEmail"
+        android:layout_alignLeft="@+id/botonGuardarEmail"
+        android:layout_alignEnd="@+id/botonGuardarEmail"
+        android:layout_alignRight="@+id/botonGuardarEmail"
+        android:layout_marginTop="15dp"
+        android:visibility="invisible"
+        android:background="@color/colorWhite"
+        android:src="@drawable/btguardar">
+
+    </ImageButton>
+
+    <ImageButton
+        android:id="@+id/botonEditarFecha"
+        android:layout_width="80dp"
+        android:layout_height="56dp"
+        android:layout_below="@id/botonEditarEmail"
+        android:layout_alignStart="@+id/botonEditarEmail"
+        android:layout_alignLeft="@+id/botonEditarEmail"
+        android:layout_alignEnd="@+id/botonEditarEmail"
+        android:layout_alignRight="@+id/botonEditarEmail"
+        android:layout_marginTop="15dp"
+        android:visibility="visible"
+        android:background="@color/colorWhite"
+        android:src="@drawable/editicon">
+
+    </ImageButton>
 
 </RelativeLayout>

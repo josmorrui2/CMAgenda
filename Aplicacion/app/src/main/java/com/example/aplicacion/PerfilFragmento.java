@@ -30,6 +30,9 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.Nullable;
 
 /**
@@ -46,7 +49,6 @@ public class PerfilFragmento extends Fragment {
     StorageReference storageReference;
     String userId;
     TextView frag;
-    TextView nombre;
 
     TextView cambiarDato;
 
@@ -91,7 +93,7 @@ public class PerfilFragmento extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-        nombre = (TextView) getActivity().findViewById(R.id.nombrePerfil);
+
         fAuth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
         storageReference = FirebaseStorage.getInstance().getReference();
@@ -99,53 +101,11 @@ public class PerfilFragmento extends Fragment {
         user = fAuth.getCurrentUser();
 
         DocumentReference documentReference = fStore.collection("Users").document(userId);
-        Log.d("tag", userId);
-        consulta("nombre");
-        mDatabase.child("Users").child(userId).child("apellidos").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DataSnapshot> task) {
-                frag = (TextView) getActivity().findViewById(R.id.apellidosPerfil);
-                Log.d("valor1", String.valueOf(task.getResult().getValue()));
-                frag.setText(String.valueOf(task.getResult().getValue()));
-            }
-        });
-        mDatabase.child("Users").child(userId).child("email").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DataSnapshot> task) {
-                frag = (TextView) getActivity().findViewById(R.id.emailPerfil);
-                Log.d("valor1", String.valueOf(task.getResult().getValue()));
-                frag.setText(String.valueOf(task.getResult().getValue()));
-            }
-        });
-        mDatabase.child("Users").child(userId).child("fecha de nacimiento").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DataSnapshot> task) {
-                frag = (TextView) getActivity().findViewById(R.id.fechaNacimientoPerfil);
-                Log.d("valor1", String.valueOf(task.getResult().getValue()));
-                frag.setText(String.valueOf(task.getResult().getValue()));
-            }
-        });
-        
+
+        cambiarDatosTextView();
 
 
     }
-//    public void onViewCreated(View view, @Nullable Bundle savedInstanceState){
-//        cambiarDato = (TextView) getView().findViewById(R.id.cambiarDatos);
-//        cambiarDato.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
-//                transaction.replace(R.id.fragPer, fragmento);
-//                transaction.addToBackStack(null);
-//                transaction.commit();
-////                Intent intent = new Intent(view.getContext(),AjustesFragmento.class);
-////                view.getContext().startActivity(intent);
-////                getActivity().finish();
-//            }
-//        });
-//        Log.d("tag1", cambiarDato.getText().toString());
-//    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -170,29 +130,43 @@ public class PerfilFragmento extends Fragment {
         return rootView;
     }
 
-    public void consulta(String clave){
-
+    public void cambiarDatosTextView(){
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        mDatabase.child("Users").child(userId).child(clave).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DataSnapshot> task) {
-                frag = (TextView) getActivity().findViewById(R.id.nombrePerfil);
-                Log.d("valor1", String.valueOf(task.getResult().getValue()));
-                frag.setText(String.valueOf(task.getResult().getValue()));
+        List<String> lista = new ArrayList<>();
+        lista.add("nombre");lista.add("apellidos");lista.add("email");lista.add("fecha de nacimiento");
 
-                frag = (TextView) getActivity().findViewById(R.id.emailPerfil);
-                Log.d("valor1", String.valueOf(task.getResult().getValue()));
-                frag.setText(String.valueOf(task.getResult().getValue()));
+        for (int i=0;i<lista.size();i++){
+            mDatabase.child("Users").child(userId).child(lista.get(i)).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DataSnapshot> task) {
+                    switch (task.getResult().getKey()){
+                        case "nombre":
+                            frag = (TextView) getActivity().findViewById(R.id.nombrePerfil);
+                            frag.setText(String.valueOf((task.getResult().getValue())));
+                            break;
+                        case "apellidos":
+                            frag = (TextView) getActivity().findViewById(R.id.apellidosPerfil);
+                            frag.setText(String.valueOf((task.getResult().getValue())));
+                            break;
+                        case "email":
+                            frag = (TextView) getActivity().findViewById(R.id.emailPerfil);
+                            frag.setText(String.valueOf((task.getResult().getValue())));
+                            break;
+                        case "fecha de nacimiento":
+                            frag = (TextView) getActivity().findViewById(R.id.fechaNacimientoPerfil);
+                            frag.setText(String.valueOf((task.getResult().getValue())));
+                            break;
+                        default:
+                            break;
+                    }
 
-                frag = (TextView) getActivity().findViewById(R.id.fechaNacimientoPerfil);
-                Log.d("valor1", String.valueOf(task.getResult().getValue()));
-                frag.setText(String.valueOf(task.getResult().getValue()));
 
+                }
 
-            }
-
-        });
+            });
+        }
 
 
     }
+
 }

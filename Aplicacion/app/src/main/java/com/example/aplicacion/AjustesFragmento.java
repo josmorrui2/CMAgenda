@@ -22,6 +22,9 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,12 +32,25 @@ import com.google.firebase.database.FirebaseDatabase;
  * create an instance of this fragment.
  */
 public class AjustesFragmento extends Fragment {
+    TextView datosDB;
+
+    ImageButton mBtnActualizarNombre;
+    ImageButton mBtnGuardarNombre;
+    ImageButton mBtnActualizarApellidos;
+    ImageButton mBtnGuardarApellidos;
+    ImageButton mBtnActualizarEmail;
+    ImageButton mBtnGuardarEmail;
+    ImageButton mBtnActualizarFecha;
+    ImageButton mBtnGuardarFecha;
+
+
     FirebaseUser user;
     FirebaseAuth fAuth;
     String userId;
-    ImageButton mBtnActualizarNombre;
     DatabaseReference mDatabase;
-    EditText nuevoNombre;
+
+    EditText editar;
+    TextView mantener;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -82,19 +98,8 @@ public class AjustesFragmento extends Fragment {
 
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
-//        Log.d("tag1", mBtnActualizarNombre.getText().toString());
+        cambiarDatosTextView();
 
-//        mBtnActualizarNombre.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Map<String,Object> personaMap = new HashMap<>();
-//                mDatabase.child("Users").child(userId).setValue(user);
-//                Log.d("valorActualizar", mDatabase.child("Users").child(userId).setValue(user).toString());
-//                startActivity(new Intent(getActivity().getPackageManager().getLaunchIntentForPackage("com.example.aplication.InicioActivity")));
-//                getActivity().finish();
-//
-//            }
-//        });
 
     }
 
@@ -103,21 +108,199 @@ public class AjustesFragmento extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView  = inflater.inflate( R.layout.fragment_ajustes_fragmento, container, false );
-        nuevoNombre = rootView.findViewById(R.id.nombre);
+
+//        ACTUALIZAR NOMBRE
+
         mBtnActualizarNombre = rootView.findViewById(R.id.botonEditarNombre);
         mBtnActualizarNombre.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mDatabase.child("Users").child(userId).child("nombre").setValue(nuevoNombre.getText().toString());
-                TextView nombreDelPerfil = (TextView) getActivity().findViewById(R.id.nomPerfil);
-                nombreDelPerfil.setText(nuevoNombre.getText().toString());
+                editar = rootView.findViewById(R.id.editarNombre);
+                mantener = rootView.findViewById(R.id.mantenerNombre);
+
+                mantener.setVisibility(View.INVISIBLE);
+                editar.setVisibility(View.VISIBLE);
+                mBtnActualizarNombre.setVisibility(View.INVISIBLE);
+                mBtnGuardarNombre.setVisibility(View.VISIBLE);
+
 
             }
 
         });
+        mBtnGuardarNombre = rootView.findViewById(R.id.botonGuardarNombre);
+        mBtnGuardarNombre.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editar = rootView.findViewById(R.id.editarNombre);
+                mantener = rootView.findViewById(R.id.mantenerNombre);
+
+                String nuevoNombreAux = editar.getText().toString();
+                mDatabase.child("Users").child(userId).child("nombre").setValue(nuevoNombreAux);
+                TextView nombreDelPerfil = (TextView) getActivity().findViewById(R.id.nomPerfil);
+                nombreDelPerfil.setText(nuevoNombreAux);
+
+                mantener.setText(nuevoNombreAux);
+                mantener.setVisibility(View.VISIBLE);
+                editar.setVisibility(View.INVISIBLE);
+                mBtnActualizarNombre.setVisibility(View.VISIBLE);
+                mBtnGuardarNombre.setVisibility(View.INVISIBLE);
+
+            }
+        });
+
+//        ACTUALIZAR APELLIDOS
+
+        mBtnActualizarApellidos = rootView.findViewById(R.id.botonEditarApellidos);
+        mBtnActualizarApellidos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editar = rootView.findViewById(R.id.editarApellidos);
+                mantener = rootView.findViewById(R.id.mantenerApellidos);
+
+                mantener.setVisibility(View.INVISIBLE);
+                editar.setVisibility(View.VISIBLE);
+                mBtnActualizarApellidos.setVisibility(View.INVISIBLE);
+                mBtnGuardarApellidos.setVisibility(View.VISIBLE);
+
+
+            }
+
+        });
+        mBtnGuardarApellidos = rootView.findViewById(R.id.botonGuardarApellidos);
+        mBtnGuardarApellidos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editar = rootView.findViewById(R.id.editarApellidos);
+                mantener = rootView.findViewById(R.id.mantenerApellidos);
+
+                String nuevoNombreAux = editar.getText().toString();
+                mDatabase.child("Users").child(userId).child("Apellidos").removeValue();
+                mDatabase.child("Users").child(userId).child("apellidos").setValue(nuevoNombreAux);
+
+                mantener.setText(nuevoNombreAux);
+                mantener.setVisibility(View.VISIBLE);
+                editar.setVisibility(View.INVISIBLE);
+                mBtnActualizarApellidos.setVisibility(View.VISIBLE);
+                mBtnGuardarApellidos.setVisibility(View.INVISIBLE);
+
+            }
+        });
+
+//        ACTUALIZAR EMAIL
+
+        mBtnActualizarEmail = rootView.findViewById(R.id.botonEditarEmail);
+        mBtnActualizarEmail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editar = rootView.findViewById(R.id.editarEmail);
+                mantener = rootView.findViewById(R.id.mantenerEmail);
+
+                mantener.setVisibility(View.INVISIBLE);
+                editar.setVisibility(View.VISIBLE);
+                mBtnActualizarEmail.setVisibility(View.INVISIBLE);
+                mBtnGuardarEmail.setVisibility(View.VISIBLE);
+
+
+            }
+
+        });
+        mBtnGuardarEmail = rootView.findViewById(R.id.botonGuardarEmail);
+        mBtnGuardarEmail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editar = rootView.findViewById(R.id.editarEmail);
+                mantener = rootView.findViewById(R.id.mantenerEmail);
+
+                String nuevoNombreAux = editar.getText().toString();
+                mDatabase.child("Users").child(userId).child("email").setValue(nuevoNombreAux);
+
+                mantener.setText(nuevoNombreAux);
+                mantener.setVisibility(View.VISIBLE);
+                editar.setVisibility(View.INVISIBLE);
+                mBtnActualizarEmail.setVisibility(View.VISIBLE);
+                mBtnGuardarEmail.setVisibility(View.INVISIBLE);
+
+            }
+        });
+
+//      ACTUALIZAR FECHA DE NACIMIENTO
+
+        mBtnActualizarFecha = rootView.findViewById(R.id.botonEditarFecha);
+        mBtnActualizarFecha.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editar = rootView.findViewById(R.id.editarFechaNacimiento);
+                mantener = rootView.findViewById(R.id.mantenerFechaNacimiento);
+
+                mantener.setVisibility(View.INVISIBLE);
+                editar.setVisibility(View.VISIBLE);
+                mBtnActualizarFecha.setVisibility(View.INVISIBLE);
+                mBtnGuardarFecha.setVisibility(View.VISIBLE);
+
+
+            }
+
+        });
+        mBtnGuardarFecha = rootView.findViewById(R.id.botonGuardarFecha);
+        mBtnGuardarFecha.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editar = rootView.findViewById(R.id.editarFechaNacimiento);
+                mantener = rootView.findViewById(R.id.mantenerFechaNacimiento);
+
+                String nuevoNombreAux = editar.getText().toString();
+                mDatabase.child("Users").child(userId).child("fecha de nacimiento").setValue(nuevoNombreAux);
+
+                mantener.setText(nuevoNombreAux);
+                mantener.setVisibility(View.VISIBLE);
+                editar.setVisibility(View.INVISIBLE);
+                mBtnActualizarFecha.setVisibility(View.VISIBLE);
+                mBtnGuardarFecha.setVisibility(View.INVISIBLE);
+
+            }
+        });
 
 
         return rootView;
+    }
+
+    public void cambiarDatosTextView(){
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        List<String> lista = new ArrayList<>();
+        lista.add("nombre");lista.add("apellidos");lista.add("email");lista.add("fecha de nacimiento");
+
+        for (int i=0;i<lista.size();i++){
+            mDatabase.child("Users").child(userId).child(lista.get(i)).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DataSnapshot> task) {
+                    switch (task.getResult().getKey()){
+                        case "nombre":
+                            datosDB = (TextView) getActivity().findViewById(R.id.mantenerNombre);
+                            datosDB.setText(String.valueOf((task.getResult().getValue())));
+                            break;
+                        case "apellidos":
+                            datosDB = (TextView) getActivity().findViewById(R.id.mantenerApellidos);
+                            datosDB.setText(String.valueOf((task.getResult().getValue())));
+                            break;
+                        case "email":
+                            datosDB = (TextView) getActivity().findViewById(R.id.mantenerEmail);
+                            datosDB.setText(String.valueOf((task.getResult().getValue())));
+                            break;
+                        case "fecha de nacimiento":
+                            datosDB = (TextView) getActivity().findViewById(R.id.mantenerFechaNacimiento);
+                            datosDB.setText(String.valueOf((task.getResult().getValue())));
+                            break;
+                        default:
+                            break;
+                    }
+
+
+                }
+
+            });
+        }
+
+
     }
 
 

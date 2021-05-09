@@ -119,6 +119,7 @@ public class HorariosFragmento extends Fragment {
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 nombreDelPerfil = (TextView) getActivity().findViewById(R.id.nomPerfil);
                 nombreDelPerfil.setText(String.valueOf((task.getResult().getValue())));
+
             }
 
         });
