@@ -43,7 +43,7 @@ public class HorariosFragmento extends Fragment {
     StorageReference storageReference;
     String userId;
     String res;
-    TextView frag;
+    TextView nombreDelPerfil;
 
     //Task<Void> nomb;
     // TODO: Rename parameter arguments, choose names that match
@@ -97,7 +97,7 @@ public class HorariosFragmento extends Fragment {
         //nomb = mDatabase.child("Users").child(userId).child("nombre").setValue("pepe");
         //Log.d("valor2", frag.getText().toString());
 
-        consulta("nombre");
+        cambioNombre();
 
 
     }
@@ -112,23 +112,16 @@ public class HorariosFragmento extends Fragment {
 
 
 
-    public void consulta(String clave){
-
+    public void cambioNombre(){
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        mDatabase.child("Users").child(userId).child(clave).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+        mDatabase.child("Users").child(userId).child("nombre").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
-                frag = (TextView) getActivity().findViewById(R.id.mHorario);
-                Log.d("valor1", String.valueOf(task.getResult().getValue()));
-                PARAMETRO = String.valueOf(task.getResult().getValue());
-                Log.d("valor2", PARAMETRO);
-                frag.setText(PARAMETRO);
-                Log.d("valor4", frag.getText().toString());
+                nombreDelPerfil = (TextView) getActivity().findViewById(R.id.nomPerfil);
+                nombreDelPerfil.setText(String.valueOf((task.getResult().getValue())));
             }
 
         });
-        String per = PARAMETRO;
-        Log.d("valor3", per);
 
     }
 

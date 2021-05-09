@@ -15,20 +15,12 @@
         android:icon="@drawable/examenes"
         android:title="@string/examenes" />
 
-    <item
-        android:id="@+id/menuCorreo"
-        android:icon="@drawable/inbox"
-        android:title="@string/correo" />
 
     <item
         android:id="@+id/menuCalendario"
         android:icon="@drawable/calendario"
         android:title="@string/calendario" />
 
-    <item
-        android:id="@+id/menuOtros"
-        android:icon="@drawable/otros"
-        android:title="@string/otros" />
 
     <item android:title="@string/otros">
 

@@ -20,4 +20,9 @@
         android:name="com.example.aplicacion.HorariosFragmento"
         android:label="Horarios"
         tools:layout="@layout/fragment_horarios_fragmento" />
+    <fragment
+        android:id="@+id/menuAjustes"
+        android:name="com.example.aplicacion.AjustesFragmento"
+        android:label="Ajustes"
+        tools:layout="@layout/fragment_ajustes_fragmento" />
 </navigation>

@@ -1,15 +1,19 @@
 package com.example.aplicacion;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -34,7 +38,8 @@ import javax.annotation.Nullable;
  * create an instance of this fragment.
  */
 public class PerfilFragmento extends Fragment {
-
+    AjustesFragmento fragmento;
+    PerfilFragmento fragmento1;
     FirebaseAuth fAuth;
     FirebaseFirestore fStore;
     FirebaseUser user;
@@ -93,8 +98,6 @@ public class PerfilFragmento extends Fragment {
         userId = fAuth.getCurrentUser().getUid();
         user = fAuth.getCurrentUser();
 
-        cambiarDato = getActivity().findViewById(R.id.cambiarDatos);
-
         DocumentReference documentReference = fStore.collection("Users").document(userId);
         Log.d("tag", userId);
         consulta("nombre");
@@ -126,12 +129,45 @@ public class PerfilFragmento extends Fragment {
 
 
     }
+//    public void onViewCreated(View view, @Nullable Bundle savedInstanceState){
+//        cambiarDato = (TextView) getView().findViewById(R.id.cambiarDatos);
+//        cambiarDato.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+//                transaction.replace(R.id.fragPer, fragmento);
+//                transaction.addToBackStack(null);
+//                transaction.commit();
+////                Intent intent = new Intent(view.getContext(),AjustesFragmento.class);
+////                view.getContext().startActivity(intent);
+////                getActivity().finish();
+//            }
+//        });
+//        Log.d("tag1", cambiarDato.getText().toString());
+//    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_perfil_fragmento, container, false);
+
+        View rootView  = inflater.inflate( R.layout.fragment_perfil_fragmento, container, false );
+        cambiarDato = rootView.findViewById(R.id.cambiarDatos);
+        cambiarDato.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                RelativeLayout f1 = (RelativeLayout) getActivity().findViewById(R.id.fragPer);
+                f1.removeAllViews();
+                FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+                transaction.replace(R.id.fragPer, new AjustesFragmento());
+                transaction.addToBackStack(null);
+                TextView textTitle = getActivity().findViewById(R.id.textTitle);
+                textTitle.setText("Ajustes");
+                transaction.commit();
+            }
+        });
+        return rootView;
     }
 
     public void consulta(String clave){

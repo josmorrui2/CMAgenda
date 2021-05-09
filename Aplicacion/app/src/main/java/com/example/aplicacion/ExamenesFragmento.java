@@ -1,11 +1,21 @@
 package com.example.aplicacion;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -13,7 +23,10 @@ import androidx.fragment.app.Fragment;
  * create an instance of this fragment.
  */
 public class ExamenesFragmento extends Fragment {
-
+    FirebaseAuth fAuth;
+    String userId;
+    TextView nombreDelPerfil;
+    DatabaseReference mDatabase;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -52,6 +65,9 @@ public class ExamenesFragmento extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        fAuth = FirebaseAuth.getInstance();
+        userId = fAuth.getCurrentUser().getUid();
+
     }
 
     @Override
@@ -60,4 +76,5 @@ public class ExamenesFragmento extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_examenes_fragmento, container, false);
     }
+
 }

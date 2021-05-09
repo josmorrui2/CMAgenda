@@ -23,4 +23,7 @@
     <string name="sobre_nosotros">Sobre nosotros</string>
     <string name="homer_simpson">Homer_simpson</string>
     <string name="conectado">Conectado</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="editar">editar</string>
 </resources>

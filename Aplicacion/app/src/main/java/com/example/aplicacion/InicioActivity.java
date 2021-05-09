@@ -41,10 +41,9 @@ public class InicioActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this,R.id.navHostFragment);
         NavigationUI.setupWithNavController(navigationView,navController);
 
-        Bundle parametros = this.getIntent().getExtras();
-        String datos = parametros.getString("EMAIL");
-        Log.d("valorLOGIN: ", datos);
-
+//        Bundle parametros = this.getIntent().getExtras();
+//        String datos = parametros.getString("EMAIL");
+//        Log.d("valorLOGIN: ", datos);
 
         TextView textTitle = findViewById(R.id.textTitle);
         navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
@@ -53,6 +52,7 @@ public class InicioActivity extends AppCompatActivity {
                 textTitle.setText(destination.getLabel());
             }
         });
+
 
 
     }
