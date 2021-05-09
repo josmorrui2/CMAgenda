@@ -34,7 +34,13 @@
                 android:id="@+id/menuAboutUs"
                 android:icon="@drawable/about"
                 android:title="@string/sobre_nosotros" />
+
         </menu>
 
     </item>
+
+    <item
+        android:id="@+id/cerrarSesion"
+        android:icon="@drawable/logout"
+        android:title="@string/cerrar_sesion" />
 </menu>

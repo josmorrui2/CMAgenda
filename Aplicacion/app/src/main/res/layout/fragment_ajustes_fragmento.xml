@@ -398,5 +398,33 @@
         android:src="@drawable/editicon">
 
     </ImageButton>
+    <Button
+        android:id="@+id/cargaImagen"
+        android:layout_width="359dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editarFechaNacimiento"
+        android:layout_alignStart="@+id/editarFechaNacimiento"
+        android:layout_alignLeft="@+id/editarFechaNacimiento"
+        android:layout_alignEnd="@+id/editarFechaNacimiento"
+        android:layout_alignRight="@+id/editarFechaNacimiento"
+        android:layout_marginTop="10dp"
+        android:gravity="center_horizontal"
+        android:text="Cargar Imagen"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/borrarPerfil"
+        android:layout_width="359dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editarFechaNacimiento"
+        android:layout_alignStart="@+id/editarFechaNacimiento"
+        android:layout_alignLeft="@+id/editarFechaNacimiento"
+        android:layout_alignEnd="@+id/editarFechaNacimiento"
+        android:layout_alignRight="@+id/editarFechaNacimiento"
+        android:layout_marginTop="80dp"
+        android:gravity="center_horizontal"
+        android:text="¿Borrar cuenta?"
+        android:textColor="@color/colorAccent"
+        android:textStyle="bold" />
 
 </RelativeLayout>

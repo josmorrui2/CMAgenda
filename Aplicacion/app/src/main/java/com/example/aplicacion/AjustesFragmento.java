@@ -1,29 +1,51 @@
 package com.example.aplicacion;
 
 
+import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+
+import static android.app.Activity.RESULT_OK;
 
 
 /**
@@ -34,6 +56,8 @@ import java.util.List;
 public class AjustesFragmento extends Fragment {
     TextView datosDB;
 
+    Button mBtnCargarImagen;
+
     ImageButton mBtnActualizarNombre;
     ImageButton mBtnGuardarNombre;
     ImageButton mBtnActualizarApellidos;
@@ -42,7 +66,10 @@ public class AjustesFragmento extends Fragment {
     ImageButton mBtnGuardarEmail;
     ImageButton mBtnActualizarFecha;
     ImageButton mBtnGuardarFecha;
+    TextView mBtnBorrarCuenta;
 
+    private StorageReference mStorage;
+    private static final int GALLERY_INTENT = 1;
 
     FirebaseUser user;
     FirebaseAuth fAuth;
@@ -51,6 +78,9 @@ public class AjustesFragmento extends Fragment {
 
     EditText editar;
     TextView mantener;
+
+    private ImageView mImageView;
+    private ProgressDialog mprogressDialog;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -95,6 +125,7 @@ public class AjustesFragmento extends Fragment {
         fAuth = FirebaseAuth.getInstance();
         user = fAuth.getCurrentUser();
         userId = fAuth.getCurrentUser().getUid();
+        mStorage = FirebaseStorage.getInstance().getReference();
 
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -109,6 +140,9 @@ public class AjustesFragmento extends Fragment {
         // Inflate the layout for this fragment
         View rootView  = inflater.inflate( R.layout.fragment_ajustes_fragmento, container, false );
 
+        View layoutView = inflater.inflate(R.layout.layout_navigation_header,container,false);
+        mImageView = layoutView.findViewById(R.id.imagenPerfil);
+        mprogressDialog = new ProgressDialog(getActivity());
 //        ACTUALIZAR NOMBRE
 
         mBtnActualizarNombre = rootView.findViewById(R.id.botonEditarNombre);
@@ -188,6 +222,30 @@ public class AjustesFragmento extends Fragment {
 
 //        ACTUALIZAR EMAIL
 
+        EditText mEditTestFechaNacimiento = rootView.findViewById(R.id.editarFechaNacimiento);
+        mEditTestFechaNacimiento.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Calendar calendar = Calendar.getInstance();
+                DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int year, int mes, int dia) {
+                        Calendar calendarResultado = Calendar.getInstance();
+                        calendarResultado.set(Calendar.YEAR,year);
+                        calendarResultado.set(Calendar.MONTH,mes);
+                        calendarResultado.set(Calendar.DAY_OF_MONTH,dia);
+                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+                        Date date = calendarResultado.getTime();
+                        String fechaNacimiento = simpleDateFormat.format(date);
+                        mEditTestFechaNacimiento.setText(fechaNacimiento);
+
+                    }
+                },calendar.get(Calendar.YEAR)-18,calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH));
+                datePickerDialog.show();
+            }
+        });
+
+
         mBtnActualizarEmail = rootView.findViewById(R.id.botonEditarEmail);
         mBtnActualizarEmail.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -212,6 +270,7 @@ public class AjustesFragmento extends Fragment {
                 mantener = rootView.findViewById(R.id.mantenerEmail);
 
                 String nuevoNombreAux = editar.getText().toString();
+                user.updateEmail(nuevoNombreAux);
                 mDatabase.child("Users").child(userId).child("email").setValue(nuevoNombreAux);
 
                 mantener.setText(nuevoNombreAux);
@@ -260,6 +319,51 @@ public class AjustesFragmento extends Fragment {
             }
         });
 
+        mBtnBorrarCuenta = rootView.findViewById(R.id.borrarPerfil);
+        mBtnBorrarCuenta.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                final AlertDialog.Builder advertencia = new AlertDialog.Builder(v.getContext());
+                datosDB = (TextView) getActivity().findViewById(R.id.mantenerNombre);
+                advertencia.setTitle(datosDB.getText().toString());
+                advertencia.setMessage("¿Seguro que quiere borrar el perfil?");
+                advertencia.setPositiveButton("si", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        mDatabase.child("Users").child(userId).removeValue();
+                        user.delete();
+                        Intent intent = new Intent(getActivity(), MainActivity.class);
+                        startActivity(intent);
+                        getActivity().finish();
+
+                    }
+                });
+
+                advertencia.setNegativeButton("no", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+
+                    }
+                });
+                advertencia.create().show();
+
+
+
+            }
+        });
+
+        mBtnCargarImagen = rootView.findViewById(R.id.cargaImagen);
+        mBtnCargarImagen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_PICK);
+                intent.setType("image/*");
+                startActivityForResult(intent,GALLERY_INTENT);
+            }
+        });
+
 
         return rootView;
     }
@@ -303,5 +407,32 @@ public class AjustesFragmento extends Fragment {
 
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
+        if(requestCode==GALLERY_INTENT && resultCode == RESULT_OK){
+
+            mprogressDialog.setTitle("Subiendo...");
+            mprogressDialog.setMessage("Subiendo foto a Firebase");
+            mprogressDialog.setCancelable(false);
+            mprogressDialog.show();
+
+            Uri uri = data.getData();
+            StorageReference filePath = mStorage.child("fotos").child(uri.getLastPathSegment());
+            filePath.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+                    mprogressDialog.dismiss();
+                    String descargarFoto = filePath.getDownloadUrl().toString();
+                    Glide.with(getContext()).load(descargarFoto).fitCenter().centerCrop().into(mImageView);
+
+                    Toast.makeText(getActivity(),"Se subió exitosamente la foto.",Toast.LENGTH_SHORT).show();
+                }
+            });
+
+        }
+
+    }
 }

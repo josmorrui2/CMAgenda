@@ -1,16 +1,19 @@
 package com.example.aplicacion;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -44,6 +47,10 @@ public class HorariosFragmento extends Fragment {
     String userId;
     String res;
     TextView nombreDelPerfil;
+    ImageView imagenPer;
+
+    private ProgressDialog mprogressDialog;
+    private ImageView mImageView;
 
     //Task<Void> nomb;
     // TODO: Rename parameter arguments, choose names that match
@@ -89,6 +96,8 @@ public class HorariosFragmento extends Fragment {
         storageReference = FirebaseStorage.getInstance().getReference();
         userId = fAuth.getCurrentUser().getUid();
         user = fAuth.getCurrentUser();
+        mImageView = (ImageView) getActivity().findViewById(R.id.imagenPerfil);
+        mprogressDialog = new ProgressDialog(getActivity());
 
         //res = consulta("nombre");
         DocumentReference documentReference = fStore.collection("Users").document(userId);
@@ -98,6 +107,17 @@ public class HorariosFragmento extends Fragment {
         //Log.d("valor2", frag.getText().toString());
 
         cambioNombre();
+
+//        imagenPer = (ImageView) getActivity().findViewById(R.id.imagenPerfil);
+//        mDatabase = FirebaseDatabase.getInstance().getReference();
+//        mDatabase.child("Users").child(userId).child("imagen").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+//            @Override
+//            public void onComplete(@NonNull Task<DataSnapshot> task) {
+//                Glide.with(getActivity()).load(task.getResult().getValue()).placeholder(R.drawable.foto_perfil).into(imagenPer);
+//
+//            }
+//
+//        });
 
 
     }

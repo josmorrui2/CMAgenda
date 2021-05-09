@@ -25,4 +25,14 @@
         android:name="com.example.aplicacion.AjustesFragmento"
         android:label="Ajustes"
         tools:layout="@layout/fragment_ajustes_fragmento" />
+    <activity
+        android:id="@+id/cerrarSesion"
+        android:name="com.example.aplicacion.MainActivity"
+        android:label="CerrarSesion"
+        tools:layout="@layout/activity_main" />
+    <fragment
+        android:id="@+id/menuCalendario"
+        android:name="com.example.aplicacion.CalendarioFragmento"
+        android:label="Calendario"
+        tools:layout="@layout/fragment_calendario_fragmento" />
 </navigation>
