@@ -5,6 +5,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -17,12 +19,20 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link com.example.aplicacion.ExamenesFragmento#newInstance} factory method to
  * create an instance of this fragment.
  */
 public class ExamenesFragmento extends Fragment {
+
+    private ListView mListView;
+    private ArrayAdapter<String> mAdapter;
+    private List<String> listData = new ArrayList<String>();
+
     FirebaseAuth fAuth;
     String userId;
     TextView nombreDelPerfil;
@@ -67,6 +77,16 @@ public class ExamenesFragmento extends Fragment {
         }
         fAuth = FirebaseAuth.getInstance();
         userId = fAuth.getCurrentUser().getUid();
+        listData.add("Examen 1");
+        listData.add("Examen 2");
+        listData.add("Examen 3");
+        listData.add("Examen 4");
+        listData.add("Examen 5");
+        listData.add("Examen 6");
+
+
+
+
 
     }
 
@@ -74,7 +94,13 @@ public class ExamenesFragmento extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_examenes_fragmento, container, false);
+
+        View rootView = inflater.inflate(R.layout.fragment_examenes_fragmento, container, false);
+        mListView = rootView.findViewById(R.id.lista);
+
+        mAdapter = new ArrayAdapter<String>(getActivity(), R.layout.support_simple_spinner_dropdown_item, listData);
+        mListView.setAdapter(mAdapter);
+        return rootView;
     }
 
 }
