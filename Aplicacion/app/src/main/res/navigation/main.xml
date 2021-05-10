@@ -11,11 +11,6 @@
         android:label="Perfil"
         tools:layout="@layout/fragment_perfil_fragmento" />
     <fragment
-        android:id="@+id/menuExamenes"
-        android:name="com.example.aplicacion.ExamenesFragmento"
-        android:label="Examenes"
-        tools:layout="@layout/fragment_examenes_fragmento" />
-    <fragment
         android:id="@+id/menuHorario"
         android:name="com.example.aplicacion.HorariosFragmento"
         android:label="Horarios"
@@ -35,4 +30,9 @@
         android:name="com.example.aplicacion.CalendarioFragmento"
         android:label="Calendario"
         tools:layout="@layout/fragment_calendario_fragmento" />
+    <fragment
+        android:id="@+id/menuExamenes"
+        android:name="com.example.aplicacion.ExamenesFragmento"
+        android:label="Examenes"
+        tools:layout="@layout/fragment_examenes_fragmento" />
 </navigation>
