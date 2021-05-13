@@ -1,19 +1,24 @@
 package com.example.aplicacion;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
@@ -97,6 +102,21 @@ public class ExamenesFragmento extends Fragment {
 
         View rootView = inflater.inflate(R.layout.fragment_examenes_fragmento, container, false);
         mListView = rootView.findViewById(R.id.lista);
+        FloatingActionButton agregar = rootView.findViewById(R.id.btnAnadirExamen);
+        agregar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LinearLayout f1 = (LinearLayout) getActivity().findViewById(R.id.fragPerExam);
+                f1.removeAllViews();
+                FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+                transaction.replace(R.id.fragPerExam, new FormularioExamenFragmento());
+                transaction.addToBackStack(null);
+                TextView textTitle = getActivity().findViewById(R.id.textTitle);
+                textTitle.setText("Examenes");
+                transaction.commit();
+
+            }
+        });
 
         mAdapter = new ArrayAdapter<String>(getActivity(), R.layout.support_simple_spinner_dropdown_item, listData);
         mListView.setAdapter(mAdapter);

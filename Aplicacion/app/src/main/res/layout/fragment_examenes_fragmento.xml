@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
+    android:id="@+id/fragPerExam"
     tools:context=".ExamenesFragmento">
 
     <TextView
@@ -24,8 +25,21 @@
         android:id="@+id/lista"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:headerDividersEnabled="true"/>
+        android:headerDividersEnabled="true" />
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnAnadirExamen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_below="@id/lista"
+        android:layout_alignStart="@+id/lista"
+        android:layout_alignLeft="@+id/lista"
+        android:layout_alignEnd="@+id/lista"
+        android:layout_alignRight="@+id/lista"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@android:drawable/ic_input_add" />
 
 
 </LinearLayout>

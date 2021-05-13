@@ -69,7 +69,7 @@
 
         <TextView
             android:layout_width="61dp"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_weight="1"
             android:fontFamily="@font/bad_script"
             android:gravity="center"
@@ -114,7 +114,7 @@
 
         <TextView
             android:layout_width="38dp"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
 
             android:layout_weight="1"
             android:fontFamily="@font/bad_script"

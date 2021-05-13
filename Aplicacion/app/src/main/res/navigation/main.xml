@@ -34,4 +34,9 @@
         android:id="@+id/menuExamenes"
         android:name="com.example.aplicacion.ExamenesFragmento"
         android:label="Examenes" />
+    <fragment
+        android:id="@+id/formularioExamen"
+        android:name="com.example.aplicacion.FormularioExamenFragmento"
+        android:label="Examenes"
+        tools:layout="@layout/fragment_formulario_examen_fragmento" />
 </navigation>
