@@ -5,6 +5,8 @@ import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -57,7 +59,7 @@ public class AjustesFragmento extends Fragment {
     TextView datosDB;
 
     Button mBtnCargarImagen;
-
+    FirebaseStorage storageRef;
     ImageButton mBtnActualizarNombre;
     ImageButton mBtnGuardarNombre;
     ImageButton mBtnActualizarApellidos;
@@ -140,8 +142,6 @@ public class AjustesFragmento extends Fragment {
         // Inflate the layout for this fragment
         View rootView  = inflater.inflate( R.layout.fragment_ajustes_fragmento, container, false );
 
-        View layoutView = inflater.inflate(R.layout.layout_navigation_header,container,false);
-        mImageView = layoutView.findViewById(R.id.imagenPerfil);
         mprogressDialog = new ProgressDialog(getActivity());
 //        ACTUALIZAR NOMBRE
 
@@ -361,6 +361,7 @@ public class AjustesFragmento extends Fragment {
                 Intent intent = new Intent(Intent.ACTION_PICK);
                 intent.setType("image/*");
                 startActivityForResult(intent,GALLERY_INTENT);
+
             }
         });
 
@@ -419,14 +420,26 @@ public class AjustesFragmento extends Fragment {
             mprogressDialog.show();
 
             Uri uri = data.getData();
-            StorageReference filePath = mStorage.child("fotos").child(uri.getLastPathSegment());
+            StorageReference filePath = mStorage.child("fotos").child(userId).child("perfil.jpg");
             filePath.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
                     mprogressDialog.dismiss();
-                    String descargarFoto = filePath.getDownloadUrl().toString();
-                    Glide.with(getContext()).load(descargarFoto).fitCenter().centerCrop().into(mImageView);
+//                    String descargarFoto = filePath.getDownloadUrl().toString();
+//                    Glide.with(getContext()).load(descargarFoto).fitCenter().centerCrop().into(mImageView);
+                    mImageView = (ImageView) getActivity().findViewById(R.id.imagenPerfil);
+
+                    storageRef = FirebaseStorage.getInstance();
+                    StorageReference fotoP = storageRef.getReference().child("fotos").child(userId).child("perfil.jpg");
+
+                    fotoP.getBytes(1024*1024).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                        @Override
+                        public void onSuccess(byte[] bytes) {
+                            Bitmap bitmap = BitmapFactory.decodeByteArray(bytes,0,bytes.length);
+                            mImageView.setImageBitmap(bitmap);
+                        }
+                    });
 
                     Toast.makeText(getActivity(),"Se subió exitosamente la foto.",Toast.LENGTH_SHORT).show();
                 }

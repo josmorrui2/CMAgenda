@@ -82,12 +82,12 @@ public class ExamenesFragmento extends Fragment {
         }
         fAuth = FirebaseAuth.getInstance();
         userId = fAuth.getCurrentUser().getUid();
-        listData.add("Examen 1");
-        listData.add("Examen 2");
-        listData.add("Examen 3");
-        listData.add("Examen 4");
-        listData.add("Examen 5");
-        listData.add("Examen 6");
+        //listData.add("Examen 1");
+        //listData.add("Examen 2");
+        //listData.add("Examen 3");
+        //listData.add("Examen 4");
+        //listData.add("Examen 5");
+        //listData.add("Examen 6");
 
 
 
@@ -101,6 +101,9 @@ public class ExamenesFragmento extends Fragment {
         // Inflate the layout for this fragment
 
         View rootView = inflater.inflate(R.layout.fragment_examenes_fragmento, container, false);
+
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+
         mListView = rootView.findViewById(R.id.lista);
         FloatingActionButton agregar = rootView.findViewById(R.id.btnAnadirExamen);
         agregar.setOnClickListener(new View.OnClickListener() {
@@ -118,8 +121,35 @@ public class ExamenesFragmento extends Fragment {
             }
         });
 
-        mAdapter = new ArrayAdapter<String>(getActivity(), R.layout.support_simple_spinner_dropdown_item, listData);
-        mListView.setAdapter(mAdapter);
+        List<String> listaaux = new ArrayList<>();
+        listaaux.add("fecha");listaaux.add("hora");
+        List<String> listaMat = new ArrayList<>();
+        listaMat.add("Ingles");listaMat.add("matematicas");
+        for(int j=0;j<listaMat.size();j++) {
+            final String[] exa = {"Examen de " + listaMat.get(j) + " el día "};
+            for (int i = 0; i < listaaux.size(); i++) {
+                final String[] ter = {"Examen de Ingles el día "};
+                int finalI = i;
+                mDatabase.child("examenes").child(userId).child("Ingles").child(listaaux.get(i)).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DataSnapshot> task) {
+                        exa[0] += task.getResult().getValue().toString();
+                        if (finalI == 0) {
+                            exa[0] += " a las ";
+                        } else {
+                            listData.add(exa[0]);
+                            mAdapter = new ArrayAdapter<String>(getActivity(), R.layout.support_simple_spinner_dropdown_item, listData);
+                            mListView.setAdapter(mAdapter);
+                        }
+                        Log.d("RESULTADO: ", task.getResult().getValue().toString());
+
+
+                    }
+
+                });
+            }
+        }
+
         return rootView;
     }
 

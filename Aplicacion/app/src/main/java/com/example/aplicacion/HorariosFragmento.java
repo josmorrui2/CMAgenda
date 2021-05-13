@@ -1,6 +1,10 @@
 package com.example.aplicacion;
 
 import android.app.ProgressDialog;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.media.Image;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,6 +19,7 @@ import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -32,25 +37,23 @@ import com.google.firebase.storage.StorageReference;
 
 import java.util.concurrent.Executor;
 
+import io.grpc.Context;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link HorariosFragmento#newInstance} factory method to
  * create an instance of this fragment.
  */
 public class HorariosFragmento extends Fragment {
-    private static String PARAMETRO = "";
     FirebaseAuth fAuth;
     FirebaseFirestore fStore;
     FirebaseUser user;
     DatabaseReference mDatabase;
     StorageReference storageReference;
     String userId;
-    String res;
     TextView nombreDelPerfil;
-    ImageView imagenPer;
-
-    private ProgressDialog mprogressDialog;
-    private ImageView mImageView;
+    ImageView mImageView;
+    FirebaseStorage storageRef;
 
     //Task<Void> nomb;
     // TODO: Rename parameter arguments, choose names that match
@@ -96,29 +99,10 @@ public class HorariosFragmento extends Fragment {
         storageReference = FirebaseStorage.getInstance().getReference();
         userId = fAuth.getCurrentUser().getUid();
         user = fAuth.getCurrentUser();
-        mImageView = (ImageView) getActivity().findViewById(R.id.imagenPerfil);
-        mprogressDialog = new ProgressDialog(getActivity());
 
-        //res = consulta("nombre");
         DocumentReference documentReference = fStore.collection("Users").document(userId);
-        //consulta("nombre");
-        //String res = consulta("nombre");
-        //nomb = mDatabase.child("Users").child(userId).child("nombre").setValue("pepe");
-        //Log.d("valor2", frag.getText().toString());
 
         cambioNombre();
-
-//        imagenPer = (ImageView) getActivity().findViewById(R.id.imagenPerfil);
-//        mDatabase = FirebaseDatabase.getInstance().getReference();
-//        mDatabase.child("Users").child(userId).child("imagen").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-//            @Override
-//            public void onComplete(@NonNull Task<DataSnapshot> task) {
-//                Glide.with(getActivity()).load(task.getResult().getValue()).placeholder(R.drawable.foto_perfil).into(imagenPer);
-//
-//            }
-//
-//        });
-
 
     }
 
@@ -140,10 +124,28 @@ public class HorariosFragmento extends Fragment {
                 nombreDelPerfil = (TextView) getActivity().findViewById(R.id.nomPerfil);
                 nombreDelPerfil.setText(String.valueOf((task.getResult().getValue())));
 
+                mImageView = (ImageView) getActivity().findViewById(R.id.imagenPerfil);
+                ponerFotoPerfil(mImageView);
+
+
             }
 
         });
 
+    }
+
+    public void ponerFotoPerfil(ImageView image){
+
+        storageRef = FirebaseStorage.getInstance();
+        StorageReference fotoP = storageRef.getReference().child("fotos").child(userId).child("perfil.jpg");
+
+        fotoP.getBytes(1024*1024).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+            @Override
+            public void onSuccess(byte[] bytes) {
+                Bitmap bitmap = BitmapFactory.decodeByteArray(bytes,0,bytes.length);
+                image.setImageBitmap(bitmap);
+            }
+        });
     }
 
 }
