@@ -109,6 +109,7 @@
         android:text="@string/login"
         android:textColor="@android:color/white"
         android:textSize="16sp"
+        android:enabled="false"
         app:backgroundTint="#67787E" />
 
     <Button

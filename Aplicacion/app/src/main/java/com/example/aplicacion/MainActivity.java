@@ -7,6 +7,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -138,7 +140,55 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        mEditTestEmail.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                if (!s.toString().equals("") && !mEditTestContraseña.getText().toString().equals("")) {
+                    mButtonlogin.setEnabled(true);
+                } else {
+                    mButtonlogin.setEnabled(false);
+                }
+            }
 
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (!s.toString().equals("") && !mEditTestContraseña.getText().toString().equals("")) {
+                    mButtonlogin.setEnabled(true);
+                } else {
+                    mButtonlogin.setEnabled(false);
+                }
+            }
+        });
+
+        mEditTestContraseña.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                if (!s.toString().equals("") && !mEditTestEmail.getText().toString().equals("")) {
+                    mButtonlogin.setEnabled(true);
+                } else {
+                    mButtonlogin.setEnabled(false);
+                }
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (!s.toString().equals("") && !mEditTestEmail.getText().toString().equals("")) {
+                    mButtonlogin.setEnabled(true);
+                } else {
+                    mButtonlogin.setEnabled(false);
+                }
+            }
+        });
     }
 
 }
