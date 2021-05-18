@@ -13,6 +13,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.graphics.drawable.RoundedBitmapDrawable;
+import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
@@ -437,7 +439,13 @@ public class AjustesFragmento extends Fragment {
                         @Override
                         public void onSuccess(byte[] bytes) {
                             Bitmap bitmap = BitmapFactory.decodeByteArray(bytes,0,bytes.length);
-                            mImageView.setImageBitmap(bitmap);
+                            //image.setImageBitmap(bitmap);
+                            RoundedBitmapDrawable drawable = RoundedBitmapDrawableFactory.create(getActivity().getResources(),
+                                    Bitmap.createScaledBitmap(bitmap, 100, 50, false));
+                            drawable.setCircular(true);
+                            mImageView.setImageDrawable(drawable);
+
+
                         }
                     });
 

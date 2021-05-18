@@ -2,11 +2,17 @@ package com.example.aplicacion;
 
 import android.os.Bundle;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -38,6 +44,8 @@ public class CalendarioFragmento extends Fragment {
      */
     // TODO: Rename and change types and number of parameters
     public static CalendarioFragmento newInstance(String param1, String param2) {
+
+
         CalendarioFragmento fragment = new CalendarioFragmento();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
@@ -59,6 +67,24 @@ public class CalendarioFragmento extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_calendario_fragmento, container, false);
+
+        View rootView = inflater.inflate(R.layout.fragment_calendario_fragmento, container, false);
+        FloatingActionButton agregar = rootView.findViewById(R.id.btnAnadirExamen);
+        agregar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ConstraintLayout f1 = (ConstraintLayout) getActivity().findViewById(R.id.fragPerExam);
+                f1.removeAllViews();
+                FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+                transaction.replace(R.id.fragPerExam, new FormularioExamenFragmento());
+                transaction.addToBackStack(null);
+                TextView textTitle = getActivity().findViewById(R.id.textTitle);
+                textTitle.setText("Examenes");
+                transaction.commit();
+
+            }
+        });
+
+        return rootView;
     }
 }

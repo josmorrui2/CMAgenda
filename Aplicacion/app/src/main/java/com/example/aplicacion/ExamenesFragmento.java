@@ -1,6 +1,7 @@
 package com.example.aplicacion;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -26,6 +28,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -120,28 +123,51 @@ public class ExamenesFragmento extends Fragment {
 
             }
         });
-
         List<String> listaaux = new ArrayList<>();
         listaaux.add("fecha");listaaux.add("hora");
-        List<String> listaMat = new ArrayList<>();
-        listaMat.add("Ingles");listaMat.add("matematicas");
+        mDatabase.child("examenes").child(userId).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                List<String> listaMat = new ArrayList<>();
+                task.getResult().getChildren().forEach(new Consumer<DataSnapshot>() {
+
+                    public void accept(DataSnapshot dataSnapshot) {
+                        listaMat.add(dataSnapshot.getKey());
+
+                    }
+                });
+                funcion1(listaMat,listaaux);
+
+            }
+        });
+
+        return rootView;
+    }
+
+    public void funcion1(List<String> listaMat, List<String> listaaux){
+
         for(int j=0;j<listaMat.size();j++) {
             final String[] exa = {"Examen de " + listaMat.get(j) + " el día "};
             for (int i = 0; i < listaaux.size(); i++) {
-                final String[] ter = {"Examen de Ingles el día "};
                 int finalI = i;
-                mDatabase.child("examenes").child(userId).child("Ingles").child(listaaux.get(i)).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+
+                mDatabase.child("examenes").child(userId).child(listaMat.get(j)).child(listaaux.get(i)).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<DataSnapshot> task) {
-                        exa[0] += task.getResult().getValue().toString();
-                        if (finalI == 0) {
-                            exa[0] += " a las ";
-                        } else {
-                            listData.add(exa[0]);
-                            mAdapter = new ArrayAdapter<String>(getActivity(), R.layout.support_simple_spinner_dropdown_item, listData);
-                            mListView.setAdapter(mAdapter);
+                        if(task.getResult().getValue() != null){
+
+                            exa[0] += task.getResult().getValue().toString();
+                            if (finalI == 0) {
+                                exa[0] += " a las ";
+                            } else {
+                                listData.add(exa[0]);
+                                mAdapter = new ArrayAdapter<String>(getActivity(), R.layout.support_simple_spinner_dropdown_item, listData);
+                                mListView.setAdapter(mAdapter);
+                            }
+                            Log.d("RESULTADO: ", task.getResult().getValue().toString());
+
                         }
-                        Log.d("RESULTADO: ", task.getResult().getValue().toString());
 
 
                     }
@@ -150,7 +176,6 @@ public class ExamenesFragmento extends Fragment {
             }
         }
 
-        return rootView;
     }
 
 }

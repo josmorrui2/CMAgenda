@@ -15,6 +15,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.graphics.drawable.RoundedBitmapDrawable;
+import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
@@ -143,7 +145,13 @@ public class HorariosFragmento extends Fragment {
             @Override
             public void onSuccess(byte[] bytes) {
                 Bitmap bitmap = BitmapFactory.decodeByteArray(bytes,0,bytes.length);
-                image.setImageBitmap(bitmap);
+                //image.setImageBitmap(bitmap);
+                RoundedBitmapDrawable drawable = RoundedBitmapDrawableFactory.create(getActivity().getResources(),
+                        Bitmap.createScaledBitmap(bitmap, 100, 70, false));
+                drawable.setCircular(true);
+                image.setImageDrawable(drawable);
+
+
             }
         });
     }
