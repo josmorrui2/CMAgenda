@@ -169,7 +169,6 @@ public class ExamenesFragmento extends Fragment {
 
                         }
 
-
                     }
 
                 });
