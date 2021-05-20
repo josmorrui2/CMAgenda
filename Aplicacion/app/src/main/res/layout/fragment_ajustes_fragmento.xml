@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragAjus"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/fragAjus"
-    android:background="@color/colorWhite"
+    android:background="@drawable/fondo"
     tools:context=".AjustesFragmento">
 
     <!-- TODO: Update blank fragment layout -->
+
+    <!--NOMBRE-->
 
     <TextView
         android:id="@+id/cambiarDatos"
@@ -17,11 +19,11 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginStart="27dp"
-        android:layout_marginLeft="27dp"
-        android:layout_marginEnd="27dp"
-        android:layout_marginRight="27dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginLeft="28dp"
         android:layout_marginTop="20dp"
+        android:layout_marginEnd="26dp"
+        android:layout_marginRight="26dp"
         android:fontFamily="@font/bad_script"
         android:gravity="center"
         android:shadowColor="#67787E"
@@ -32,9 +34,8 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Display3"
         android:textColor="#FAF4F4"
         android:textSize="36sp"
-        android:textStyle="bold"/>
+        android:textStyle="bold" />
 
-    <!--NOMBRE-->
     <TextView
         android:id="@+id/textnombre"
         android:layout_width="111dp"
@@ -42,43 +43,42 @@
         android:layout_below="@id/cambiarDatos"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="243dp"
-        android:layout_marginRight="243dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="277dp"
+        android:layout_marginRight="277dp"
         android:fontFamily="sans-serif-condensed-medium"
         android:gravity="center"
         android:text="Nombre"
         android:textColor="@color/colorPrimaryText"
-        android:textSize="12sp"/>
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/mantenerNombre"
-        android:layout_width="111dp"
-        android:layout_height="56dp"
+        android:layout_width="176dp"
+        android:layout_height="52dp"
         android:layout_below="@id/cambiarDatos"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="114dp"
-        android:layout_marginRight="114dp"
-        android:background="#9c9c9c"
+        android:layout_marginTop="54dp"
+        android:layout_marginEnd="99dp"
+        android:layout_marginRight="99dp"
+        android:background="#8FD8EBF4"
         android:fontFamily="sans-serif-condensed-medium"
         android:gravity="center"
-        android:text="@string/nombre"
         android:textColor="@color/colorPrimaryText"
         android:textSize="12sp"
-        android:visibility="visible"/>
+        android:visibility="visible" />
 
     <EditText
         android:id="@+id/editarNombre"
-        android:layout_width="111dp"
-        android:layout_height="56dp"
+        android:layout_width="wrap_content"
+        android:layout_height="41dp"
         android:layout_below="@id/cambiarDatos"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="114dp"
-        android:layout_marginRight="114dp"
+        android:layout_marginTop="65dp"
+        android:layout_marginEnd="112dp"
+        android:layout_marginRight="112dp"
         android:background="#8FD8EBF4"
         android:ems="10"
         android:fontFamily="sans-serif-condensed-medium"
@@ -101,27 +101,25 @@
         android:layout_marginTop="50dp"
         android:layout_marginEnd="22dp"
         android:layout_marginRight="22dp"
-        android:visibility="invisible"
         android:background="@color/colorWhite"
-        android:src="@drawable/btguardar">
+        android:src="@drawable/btguardar"
+        android:visibility="invisible">
 
     </ImageButton>
 
     <ImageButton
         android:id="@+id/botonEditarNombre"
-        android:layout_width="80dp"
-        android:layout_height="56dp"
+        android:layout_width="56dp"
+        android:layout_height="53dp"
         android:layout_below="@id/cambiarDatos"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="53dp"
         android:layout_marginEnd="22dp"
         android:layout_marginRight="22dp"
-        android:textColor="@android:color/white"
+        android:src="@drawable/editicon"
         android:textSize="16sp"
-        android:visibility="visible"
-        android:background="@color/colorWhite"
-        android:src="@drawable/editicon">
+        android:visibility="visible">
 
     </ImageButton>
 
@@ -140,7 +138,7 @@
         android:gravity="center"
         android:text="Apellidos"
         android:textColor="@color/colorPrimaryText"
-        android:textSize="12sp"  />
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/mantenerApellidos"
@@ -152,17 +150,16 @@
         android:layout_alignEnd="@+id/mantenerNombre"
         android:layout_alignRight="@+id/mantenerNombre"
         android:layout_marginTop="15dp"
-        android:background="#9c9c9c"
+        android:background="#8FD8EBF4"
         android:fontFamily="sans-serif-condensed-medium"
         android:gravity="center"
-        android:text="@string/apellidos"
         android:textColor="@color/colorPrimaryText"
         android:textSize="12sp"
         android:visibility="visible" />
 
     <EditText
         android:id="@+id/editarApellidos"
-        android:layout_width="111dp"
+        android:layout_width="wrap_content"
         android:layout_height="56dp"
         android:layout_below="@id/editarNombre"
         android:layout_alignStart="@+id/editarNombre"
@@ -177,7 +174,7 @@
         android:gravity="center"
         android:hint="@string/apellidos"
         android:inputType="text"
-        android:textColor="#67787E"
+        android:textColor="#8FD8EBF4"
         android:textColorHighlight="#DAC4C4"
         android:textSize="12sp"
         android:visibility="invisible"
@@ -193,9 +190,9 @@
         android:layout_alignEnd="@+id/botonGuardarNombre"
         android:layout_alignRight="@+id/botonGuardarNombre"
         android:layout_marginTop="15dp"
-        android:visibility="invisible"
         android:background="@color/colorWhite"
-        android:src="@drawable/btguardar">
+        android:src="@drawable/btguardar"
+        android:visibility="invisible">
 
     </ImageButton>
 
@@ -209,9 +206,8 @@
         android:layout_alignEnd="@+id/botonEditarNombre"
         android:layout_alignRight="@+id/botonEditarNombre"
         android:layout_marginTop="15dp"
-        android:visibility="visible"
-        android:background="@color/colorWhite"
-        android:src="@drawable/editicon">
+        android:src="@drawable/editicon"
+        android:visibility="visible">
 
     </ImageButton>
 
@@ -230,7 +226,7 @@
         android:gravity="center"
         android:text="Email"
         android:textColor="@color/colorPrimaryText"
-        android:textSize="12sp" />
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/mantenerEmail"
@@ -242,17 +238,17 @@
         android:layout_alignEnd="@+id/mantenerApellidos"
         android:layout_alignRight="@+id/mantenerApellidos"
         android:layout_marginTop="15dp"
-        android:background="#9c9c9c"
+        android:background="#8FD8EBF4"
         android:fontFamily="sans-serif-condensed-medium"
         android:gravity="center"
-        android:text="@string/email"
+        android:text="info@undercontrol.com"
         android:textColor="@color/colorPrimaryText"
         android:textSize="12sp"
-        android:visibility="visible"/>
+        android:visibility="visible" />
 
     <EditText
         android:id="@+id/editarEmail"
-        android:layout_width="111dp"
+        android:layout_width="wrap_content"
         android:layout_height="56dp"
         android:layout_below="@id/editarApellidos"
         android:layout_alignStart="@+id/editarApellidos"
@@ -284,9 +280,9 @@
         android:layout_alignEnd="@+id/botonGuardarApellidos"
         android:layout_alignRight="@+id/botonGuardarApellidos"
         android:layout_marginTop="15dp"
-        android:visibility="invisible"
         android:background="@color/colorWhite"
-        android:src="@drawable/btguardar">
+        android:src="@drawable/btguardar"
+        android:visibility="invisible">
 
     </ImageButton>
 
@@ -300,9 +296,8 @@
         android:layout_alignEnd="@+id/botonEditarApellidos"
         android:layout_alignRight="@+id/botonEditarApellidos"
         android:layout_marginTop="15dp"
-        android:visibility="visible"
-        android:background="@color/colorWhite"
-        android:src="@drawable/editicon">
+        android:src="@drawable/editicon"
+        android:visibility="visible">
 
     </ImageButton>
 
@@ -322,7 +317,7 @@
         android:gravity="center"
         android:text="Fecha de Nacimiento"
         android:textColor="@color/colorPrimaryText"
-        android:textSize="12sp" />
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/mantenerFechaNacimiento"
@@ -334,17 +329,17 @@
         android:layout_alignEnd="@+id/mantenerEmail"
         android:layout_alignRight="@+id/mantenerEmail"
         android:layout_marginTop="15dp"
-        android:background="#9c9c9c"
+        android:background="#8FD8EBF4"
         android:fontFamily="sans-serif-condensed-medium"
         android:gravity="center"
-        android:text="@string/FechaNacimiento"
+        android:text="DD/MM/YY"
         android:textColor="@color/colorPrimaryText"
         android:textSize="12sp"
         android:visibility="visible" />
 
     <EditText
         android:id="@+id/editarFechaNacimiento"
-        android:layout_width="111dp"
+        android:layout_width="wrap_content"
         android:layout_height="56dp"
         android:layout_below="@id/editarEmail"
         android:layout_alignStart="@+id/editarEmail"
@@ -377,9 +372,9 @@
         android:layout_alignEnd="@+id/botonGuardarEmail"
         android:layout_alignRight="@+id/botonGuardarEmail"
         android:layout_marginTop="15dp"
-        android:visibility="invisible"
         android:background="@color/colorWhite"
-        android:src="@drawable/btguardar">
+        android:src="@drawable/btguardar"
+        android:visibility="invisible">
 
     </ImageButton>
 
@@ -393,11 +388,11 @@
         android:layout_alignEnd="@+id/botonEditarEmail"
         android:layout_alignRight="@+id/botonEditarEmail"
         android:layout_marginTop="15dp"
-        android:visibility="visible"
-        android:background="@color/colorWhite"
-        android:src="@drawable/editicon">
+        android:src="@drawable/editicon"
+        android:visibility="visible">
 
     </ImageButton>
+
     <Button
         android:id="@+id/cargaImagen"
         android:layout_width="359dp"
@@ -407,7 +402,11 @@
         android:layout_alignLeft="@+id/editarFechaNacimiento"
         android:layout_alignEnd="@+id/editarFechaNacimiento"
         android:layout_alignRight="@+id/editarFechaNacimiento"
-        android:layout_marginTop="10dp"
+        android:layout_marginStart="-2dp"
+        android:layout_marginLeft="-2dp"
+        android:layout_marginTop="26dp"
+        android:layout_marginEnd="3dp"
+        android:layout_marginRight="3dp"
         android:gravity="center_horizontal"
         android:text="Cargar Imagen"
         android:textStyle="bold" />
@@ -416,12 +415,16 @@
         android:id="@+id/borrarPerfil"
         android:layout_width="359dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/editarFechaNacimiento"
+        android:layout_below="@+id/cargaImagen"
         android:layout_alignStart="@+id/editarFechaNacimiento"
         android:layout_alignLeft="@+id/editarFechaNacimiento"
         android:layout_alignEnd="@+id/editarFechaNacimiento"
         android:layout_alignRight="@+id/editarFechaNacimiento"
-        android:layout_marginTop="80dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginLeft="1dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginRight="1dp"
         android:gravity="center_horizontal"
         android:text="¿Borrar cuenta?"
         android:textColor="@color/colorAccent"
