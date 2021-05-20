@@ -13,7 +13,7 @@
         android:id="@+id/title_exams"
         android:layout_width="match_parent"
         android:layout_height="64dp"
-        android:background="#00ACC1"
+        android:background="#154360 "
         android:text="Tus exámenes"
         android:layout_gravity="center"
         android:textAlignment="center"

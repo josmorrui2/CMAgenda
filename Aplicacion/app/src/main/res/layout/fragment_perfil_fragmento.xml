@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragPer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/fragPer"
+    android:background="@drawable/fondo"
     tools:context=".PerfilFragmento">
 
 
-
     <!--    &lt;!&ndash; TODO: Update blank fragment layout &ndash;&gt;-->
-<!--    <TextView-->
-<!--        android:id="@+id/nombrePerfil"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_gravity="center"-->
-<!--        android:text="@string/ajustes"-->
-<!--        android:textSize="20sp" />-->
+    <!--    <TextView-->
+    <!--        android:id="@+id/nombrePerfil"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_gravity="center"-->
+    <!--        android:text="@string/ajustes"-->
+    <!--        android:textSize="20sp" />-->
 
     <LinearLayout
         android:id="@+id/control1"
@@ -23,7 +23,11 @@
         android:layout_height="40dp"
         android:layout_marginTop="100dp"
         android:gravity="center"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
+        android:background="#8FD8EBF4">
 
         <TextView
             android:layout_width="50dp"
@@ -31,13 +35,9 @@
             android:layout_weight="1"
             android:fontFamily="@font/bad_script"
             android:gravity="center"
-            android:shadowColor="#67787E"
-            android:shadowDx="4"
-            android:shadowDy="4"
-            android:shadowRadius="4"
             android:text="NOMBRE : "
             android:textAppearance="@style/TextAppearance.AppCompat.Display3"
-            android:textColor="#FAF4F4"
+            android:textColor="#154360"
             android:textSize="14sp"
             android:textStyle="bold" />
 
@@ -49,23 +49,24 @@
             android:gravity="center"
             android:shadowColor="#67787E"
             android:text="nombre"
-            android:textColor="@color/colorPrimaryText"
+            android:textColor="#154360"
             android:textSize="14sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/control2"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:gravity="center"
-        android:layout_weight="1"
-        android:orientation="horizontal"
         android:layout_below="@id/control1"
         android:layout_alignStart="@+id/control1"
         android:layout_alignLeft="@+id/control1"
         android:layout_alignEnd="@+id/control1"
-        android:layout_alignRight="@+id/control1">
+        android:layout_alignRight="@+id/control1"
+        android:layout_weight="1"
+        android:background="#8FD8EBF4"
+        android:gravity="center"
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="61dp"
@@ -73,13 +74,9 @@
             android:layout_weight="1"
             android:fontFamily="@font/bad_script"
             android:gravity="center"
-            android:shadowColor="#67787E"
-            android:shadowDx="4"
-            android:shadowDy="4"
-            android:shadowRadius="4"
             android:text="APELLIDOS : "
             android:textAppearance="@style/TextAppearance.AppCompat.Display3"
-            android:textColor="#FAF4F4"
+            android:textColor="#154360"
             android:textSize="14sp"
             android:textStyle="bold" />
 
@@ -92,7 +89,7 @@
             android:gravity="center"
             android:shadowColor="#67787E"
             android:text="apellidos"
-            android:textColor="@color/colorPrimaryText"
+            android:textColor="#154360"
             android:textSize="14sp"
             android:textStyle="bold" />
 
@@ -103,29 +100,25 @@
         android:id="@+id/control3"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:gravity="center"
-        android:orientation="horizontal"
         android:layout_below="@id/control2"
         android:layout_alignStart="@+id/control2"
         android:layout_alignLeft="@+id/control2"
         android:layout_alignEnd="@+id/control2"
-        android:layout_alignRight="@+id/control2">
-        >
+        android:layout_alignRight="@+id/control2"
+        android:gravity="center"
+        android:background="#8FD8EBF4"
+        android:orientation="horizontal">
+
 
         <TextView
             android:layout_width="38dp"
             android:layout_height="40dp"
-
             android:layout_weight="1"
             android:fontFamily="@font/bad_script"
             android:gravity="center"
-            android:shadowColor="#67787E"
-            android:shadowDx="4"
-            android:shadowDy="4"
-            android:shadowRadius="4"
             android:text="EMAIL : "
             android:textAppearance="@style/TextAppearance.AppCompat.Display3"
-            android:textColor="#FAF4F4"
+            android:textColor="#154360"
             android:textSize="14sp"
             android:textStyle="bold" />
 
@@ -138,7 +131,7 @@
             android:gravity="center"
             android:shadowColor="#67787E"
             android:text="email"
-            android:textColor="@color/colorPrimaryText"
+            android:textColor="#154360"
             android:textSize="14sp"
             android:textStyle="bold" />
 
@@ -148,29 +141,25 @@
         android:id="@+id/control4"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:gravity="center"
-        android:orientation="horizontal"
         android:layout_below="@id/control3"
         android:layout_alignStart="@+id/control3"
         android:layout_alignLeft="@+id/control3"
         android:layout_alignEnd="@+id/control3"
-        android:layout_alignRight="@+id/control3">
+        android:layout_alignRight="@+id/control3"
+        android:background="#8FD8EBF4"
+        android:gravity="center"
+        android:orientation="horizontal">
 
 
         <TextView
             android:layout_width="139dp"
             android:layout_height="wrap_content"
-
             android:layout_weight="1"
             android:fontFamily="@font/bad_script"
             android:gravity="center"
-            android:shadowColor="#67787E"
-            android:shadowDx="4"
-            android:shadowDy="4"
-            android:shadowRadius="4"
             android:text="FECHA DE NACIMIENTO : "
             android:textAppearance="@style/TextAppearance.AppCompat.Display3"
-            android:textColor="#FAF4F4"
+            android:textColor="#154360"
             android:textSize="14sp"
             android:textStyle="bold"
 
@@ -185,10 +174,9 @@
             android:gravity="center"
             android:shadowColor="#67787E"
             android:text="Fecha de Nacimiento"
-            android:textColor="@color/colorPrimaryText"
+            android:textColor="#154360"
             android:textSize="14sp"
-            android:textStyle="bold"
-         />
+            android:textStyle="bold" />
 
     </LinearLayout>
 
@@ -196,31 +184,31 @@
         android:id="@+id/cambiarDatos"
         android:layout_width="183dp"
         android:layout_height="wrap_content"
+        android:layout_below="@id/control4"
+        android:layout_alignStart="@+id/control4"
+        android:layout_alignLeft="@+id/control4"
         android:layout_alignTop="@+id/signUpButton"
+        android:layout_alignEnd="@+id/control4"
+        android:layout_alignRight="@+id/control4"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_marginTop="51dp"
-        android:layout_below="@id/control4"
-        android:layout_alignStart="@+id/control4"
-        android:layout_alignLeft="@+id/control4"
-        android:layout_alignEnd="@+id/control4"
-        android:layout_alignRight="@+id/control4"
         android:gravity="center_horizontal"
         android:text="¿Quieres cambiar algún dato?"
         android:textColor="@color/colorAccent"
         android:textStyle="bold" />
-<!--    <Button-->
-<!--        android:id="@+id/button2"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_weight="1"-->
-<!--        android:text="¿Quieres cambiar algún dato?"-->
-<!--        android:layout_below="@id/control4"-->
-<!--        android:layout_alignStart="@+id/control4"-->
-<!--        android:layout_alignLeft="@+id/control4"-->
-<!--        android:layout_alignEnd="@+id/control4"-->
-<!--        android:layout_alignRight="@+id/control4"/>-->
+    <!--    <Button-->
+    <!--        android:id="@+id/button2"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_weight="1"-->
+    <!--        android:text="¿Quieres cambiar algún dato?"-->
+    <!--        android:layout_below="@id/control4"-->
+    <!--        android:layout_alignStart="@+id/control4"-->
+    <!--        android:layout_alignLeft="@+id/control4"-->
+    <!--        android:layout_alignEnd="@+id/control4"-->
+    <!--        android:layout_alignRight="@+id/control4"/>-->
 
 </RelativeLayout>
