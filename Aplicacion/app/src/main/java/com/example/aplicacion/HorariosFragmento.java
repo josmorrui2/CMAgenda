@@ -226,7 +226,9 @@ public class HorariosFragmento extends Fragment {
                     for(int j=ultimo;j<=ultimo;j++){
                         View parentRow = tableLayout.getChildAt(j-1);
                         String horaH = ((TextView) ((TableRow) parentRow).getChildAt(0)).getText().toString();
-                        mDatabase.child("Exams").child(userId).child(horaH).removeValue();
+                        if(!horaH.equals("")){
+                            mDatabase.child("Horario").child(userId).child(horaH).removeValue();
+                        }
                         tableLayout.removeViewAt(ultimo-1);
 
 
@@ -289,7 +291,7 @@ public class HorariosFragmento extends Fragment {
                     Log.d("mapHora: ", mapHora.toString());
                 }
 
-                mDatabase.child("Exams").child(userId).setValue(mapHora).addOnCompleteListener(new OnCompleteListener<Void>() {
+                mDatabase.child("Horario").child(userId).setValue(mapHora).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if(task.isSuccessful()){
@@ -306,7 +308,7 @@ public class HorariosFragmento extends Fragment {
     }
 
     public void cargarDatos(){
-        mDatabase.child("Exams").child(userId).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+        mDatabase.child("Horario").child(userId).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
@@ -338,7 +340,9 @@ public class HorariosFragmento extends Fragment {
 
                         tableParams = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.MATCH_PARENT);
                         tableParams.weight=1;
-                        tableLayout.addView(tableRow);
+                        if(tableLayout != null && tableRow != null){
+                            tableLayout.addView(tableRow);
+                        }
 
                     }
                 });
