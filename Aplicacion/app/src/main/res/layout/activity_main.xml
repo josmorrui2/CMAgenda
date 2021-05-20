@@ -79,7 +79,6 @@
         android:layout_marginRight="70dp"
         android:autofillHints="password"
         android:background="#8FD8EBF4"
-        android:editable="true"
         android:ems="10"
         android:fontFamily="sans-serif-condensed-medium"
         android:gravity="center"

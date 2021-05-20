@@ -122,7 +122,7 @@
         app:layout_constraintEnd_toStartOf="@+id/btnAddRow" />
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/btnEditaHorario"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:src="@drawable/editicon"
