@@ -85,17 +85,6 @@ public class ExamenesFragmento extends Fragment {
         }
         fAuth = FirebaseAuth.getInstance();
         userId = fAuth.getCurrentUser().getUid();
-        //listData.add("Examen 1");
-        //listData.add("Examen 2");
-        //listData.add("Examen 3");
-        //listData.add("Examen 4");
-        //listData.add("Examen 5");
-        //listData.add("Examen 6");
-
-
-
-
-
     }
 
     @Override

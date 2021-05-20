@@ -5,7 +5,9 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.util.ArraySet;
 import android.util.Log;
@@ -13,8 +15,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ListView;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -24,9 +29,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.function.Consumer;
 
@@ -37,12 +40,9 @@ import java.util.function.Consumer;
  */
 public class FormularioExamenFragmento extends Fragment {
     private Spinner mSpinner;
-    private ArrayAdapter<String> mAdapter;
-    private List<String> listData = new ArrayList<String>();
     String userId;
     DatabaseReference mDatabase;
-
-    String[] arrayPaises = {"peru", "mexico", "Brasil", "venezuela"};
+    Button btnCancelar, btnGuardar;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -83,7 +83,6 @@ public class FormularioExamenFragmento extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
         userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -120,6 +119,21 @@ public class FormularioExamenFragmento extends Fragment {
                 listAs.addAll(Asignaturas);
                 mSpinner.setAdapter(new ArrayAdapter<String>(getActivity(),R.layout.support_simple_spinner_dropdown_item,listAs));
                 Log.d("Hora: ", Asignaturas.toString());
+
+                btnCancelar = rootView.findViewById(R.id.btnCancel);
+                btnCancelar.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        LinearLayout f1 = getActivity().findViewById(R.id.fragFormExam);
+                        f1.removeAllViews();
+                        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+                        transaction.replace(R.id.fragFormExam, new ExamenesFragmento());
+                        transaction.addToBackStack(null);
+                        TextView textTitle = getActivity().findViewById(R.id.textTitle);
+                        textTitle.setText("Examenes");
+                        transaction.commit();
+                    }
+                });
             }
 
         });
