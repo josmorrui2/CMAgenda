@@ -87,47 +87,46 @@
     </TableLayout>
 
     <ImageButton
-        android:id="@+id/btnAddRow"
-        android:layout_width="56dp"
-        android:layout_height="45dp"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="16dp"
-        android:background="@color/colorWhite"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@android:drawable/ic_input_add" />
-
-    <ImageButton
         android:id="@+id/btnGuardaHorario"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="32dp"
-        android:layout_marginBottom="46dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/tbHorario"
-        app:layout_constraintEnd_toStartOf="@+id/btnAddRow"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:background="@color/colorWhite"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/tbHorario"
+        app:layout_constraintEnd_toEndOf="@+id/tbHorario"
         app:srcCompat="@drawable/btguardar" />
 
     <ImageButton
+        android:id="@+id/btnAddRow"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:background="@color/colorWhite"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/tbHorario"
+        app:layout_constraintEnd_toStartOf="@+id/btnGuardaHorario"
+        app:srcCompat="@android:drawable/ic_input_add" />
+
+    <ImageButton
         android:id="@+id/btnDeleteRow"
-        android:layout_width="55dp"
-        android:layout_height="43dp"
-        android:layout_margin="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="32dp"
-        android:layout_marginBottom="46dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         android:background="@color/colorWhite"
         android:src="@drawable/ic_outline_delete_24"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/tbHorario"
-        app:layout_constraintEnd_toStartOf="@+id/btnGuardaHorario" />
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/tbHorario"
+        app:layout_constraintEnd_toStartOf="@+id/btnAddRow" />
 
-
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/editicon"
+        app:layout_constraintBottom_toBottomOf="@+id/tbHorario"
+        app:layout_constraintEnd_toEndOf="@+id/tbHorario" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
