@@ -82,16 +82,6 @@
                 android:background="@drawable/horario_style"
                 android:textSize="18dp" />
 
-            <ImageButton
-                android:id="@+id/delete"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:visibility="invisible"
-                android:enabled="false"
-                android:src="@drawable/ic_outline_delete_24"
-                android:background="@drawable/horario_style" />
-
         </TableRow>
 
     </TableLayout>
