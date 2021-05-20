@@ -31,6 +31,7 @@ import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentContainerView;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -75,6 +76,7 @@ public class HorariosFragmento extends Fragment {
     TableLayout tableLayout;
     TableRow tableRow;
     EditText txtCell;
+    TextView txtCell2;
     ImageButton btnEliminar;
 
     ImageButton btnAñadir;
@@ -300,6 +302,10 @@ public class HorariosFragmento extends Fragment {
                         }
                     }
                 });
+                btnBorrar.setVisibility(View.INVISIBLE);
+                btnAñade.setVisibility(view.INVISIBLE);
+                btnGuarda.setVisibility(View.INVISIBLE);
+                //btnEditar.setVisibility(view.VISIBLE);
 
             }
 
@@ -317,22 +323,22 @@ public class HorariosFragmento extends Fragment {
                         tableRow = new TableRow(getActivity());
                         tableRow.setLayoutParams(tableParams);
 
-                        txtCell = new EditText(getActivity());
-                        txtCell.setGravity(Gravity.CENTER);
-                        txtCell.setText(dataSnapshot.getKey());
-                        txtCell.setLayoutParams(tableParams);
-                        txtCell.setBackgroundResource(R.drawable.horario_style);
-                        tableRow.addView(txtCell);
+                        txtCell2 = new TextView(getActivity());
+                        txtCell2.setGravity(Gravity.CENTER);
+                        txtCell2.setText(dataSnapshot.getKey());
+                        txtCell2.setLayoutParams(tableParams);
+                        txtCell2.setBackgroundResource(R.drawable.horario_style);
+                        tableRow.addView(txtCell2);
 
                         dataSnapshot.getChildren().forEach(new Consumer<DataSnapshot>() {
                             @Override
                             public void accept(DataSnapshot dataSnapshot1) {
-                                txtCell = new EditText(getActivity());
-                                txtCell.setGravity(Gravity.CENTER);
-                                txtCell.setText(dataSnapshot1.getValue().toString());
-                                txtCell.setLayoutParams(tableParams);
-                                txtCell.setBackgroundResource(R.drawable.horario_style);
-                                tableRow.addView(txtCell);
+                                txtCell2 = new TextView(getActivity());
+                                txtCell2.setGravity(Gravity.CENTER);
+                                txtCell2.setText(dataSnapshot1.getValue().toString());
+                                txtCell2.setLayoutParams(tableParams);
+                                txtCell2.setBackgroundResource(R.drawable.horario_style);
+                                tableRow.addView(txtCell2);
                             }
 
                         });
