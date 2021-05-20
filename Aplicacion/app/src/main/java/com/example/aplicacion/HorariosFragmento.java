@@ -1,12 +1,7 @@
 package com.example.aplicacion;
 
-import android.app.ProgressDialog;
-import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.media.Image;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,7 +9,6 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -24,38 +18,26 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.core.graphics.drawable.RoundedBitmapDrawable;
 import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentContainerView;
 
-import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.model.Document;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.Executor;
 import java.util.function.Consumer;
-
-import io.grpc.Context;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -77,14 +59,10 @@ public class HorariosFragmento extends Fragment {
     TableRow tableRow;
     EditText txtCell;
     TextView txtCell2;
-    ImageButton btnEliminar;
 
-    ImageButton btnAñadir;
-    ImageButton btnBorrar;
-    ImageButton btnGuarda;
+    ImageButton btnAñadir, btnBorrar, btnGuarda, btnEdita;
 
     private static TableRow.LayoutParams tableParams;
-    private static Integer numFilas;
     //Task<Void> nomb;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -92,8 +70,6 @@ public class HorariosFragmento extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     public HorariosFragmento() {
         // Required empty public constructor
@@ -120,22 +96,15 @@ public class HorariosFragmento extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
         fAuth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
         storageReference = FirebaseStorage.getInstance().getReference();
         userId = fAuth.getCurrentUser().getUid();
         user = fAuth.getCurrentUser();
 
-        DocumentReference documentReference = fStore.collection("Users").document(userId);
         tableParams = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT);
-        numFilas = 1;
         cambioNombre();
         cargarDatos();
-
 
     }
 
@@ -148,9 +117,10 @@ public class HorariosFragmento extends Fragment {
         btnAñadir = principal.findViewById(R.id.btnAddRow);
         btnBorrar = principal.findViewById(R.id.btnDeleteRow);
         btnGuarda = principal.findViewById(R.id.btnGuardaHorario);
+        btnEdita = principal.findViewById(R.id.btnEditaHorario);
         //getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
-        AddRow(tableLayout,btnAñadir);
+        AddRow();
         return principal;
     }
 
@@ -161,13 +131,11 @@ public class HorariosFragmento extends Fragment {
         mDatabase.child("Users").child(userId).child("nombre").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
-                nombreDelPerfil = (TextView) getActivity().findViewById(R.id.nomPerfil);
+                nombreDelPerfil = getActivity().findViewById(R.id.nomPerfil);
                 nombreDelPerfil.setText(String.valueOf((task.getResult().getValue())));
 
-                mImageView = (ImageView) getActivity().findViewById(R.id.imagenPerfil);
+                mImageView = getActivity().findViewById(R.id.imagenPerfil);
                 ponerFotoPerfil(mImageView);
-
-
             }
 
         });
@@ -188,15 +156,13 @@ public class HorariosFragmento extends Fragment {
                         Bitmap.createScaledBitmap(bitmap, 100, 70, false));
                 drawable.setCircular(true);
                 image.setImageDrawable(drawable);
-
-
             }
         });
     }
 
-    public void AddRow(View view, ImageButton btnAñade) {
+    public void AddRow() {
 
-        btnAñade.setOnClickListener(new View.OnClickListener() {
+        btnAñadir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 tableRow = new TableRow(getActivity());
@@ -214,11 +180,9 @@ public class HorariosFragmento extends Fragment {
                 tableParams = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.MATCH_PARENT);
                 tableParams.weight=1;
                 tableLayout.addView(tableRow);
-
-                numFilas+=1;
-
             }
         });
+
         btnBorrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -231,13 +195,9 @@ public class HorariosFragmento extends Fragment {
                             mDatabase.child("Horario").child(userId).child(horaH).removeValue();
                         }
                         tableLayout.removeViewAt(ultimo-1);
-
-
                     }
                 }
-
             }
-
         });
 
         btnGuarda.setOnClickListener(new View.OnClickListener() {
@@ -302,14 +262,28 @@ public class HorariosFragmento extends Fragment {
                         }
                     }
                 });
+                mapHora = new HashMap<>();
                 btnBorrar.setVisibility(View.INVISIBLE);
-                btnAñade.setVisibility(view.INVISIBLE);
+                btnAñadir.setVisibility(View.INVISIBLE);
                 btnGuarda.setVisibility(View.INVISIBLE);
-                //btnEditar.setVisibility(view.VISIBLE);
+                btnEdita.setVisibility(View.VISIBLE);
 
+                borrarTabla();
+                cargarDatos();
             }
+        });
 
-            });
+        btnEdita.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                btnBorrar.setVisibility(View.VISIBLE);
+                btnAñadir.setVisibility(View.VISIBLE);
+                btnGuarda.setVisibility(View.VISIBLE);
+                btnEdita.setVisibility(View.INVISIBLE);
+                borrarTabla();
+                cargarDatosEdit();
+            }
+        });
     }
 
     public void cargarDatos(){
@@ -357,7 +331,57 @@ public class HorariosFragmento extends Fragment {
 
     }
 
+    public void cargarDatosEdit(){
+        mDatabase.child("Horario").child(userId).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                task.getResult().getChildren().forEach(new Consumer<DataSnapshot>() {
+                    @Override
+                    public void accept(DataSnapshot dataSnapshot) {
+                        tableRow = new TableRow(getActivity());
+                        tableRow.setLayoutParams(tableParams);
 
+                        txtCell2 = new EditText(getActivity());
+                        txtCell2.setGravity(Gravity.CENTER);
+                        txtCell2.setText(dataSnapshot.getKey());
+                        txtCell2.setLayoutParams(tableParams);
+                        txtCell2.setBackgroundResource(R.drawable.horario_style);
+                        tableRow.addView(txtCell2);
+
+                        dataSnapshot.getChildren().forEach(new Consumer<DataSnapshot>() {
+                            @Override
+                            public void accept(DataSnapshot dataSnapshot1) {
+                                txtCell2 = new EditText(getActivity());
+                                txtCell2.setGravity(Gravity.CENTER);
+                                txtCell2.setText(dataSnapshot1.getValue().toString());
+                                txtCell2.setLayoutParams(tableParams);
+                                txtCell2.setBackgroundResource(R.drawable.horario_style);
+                                tableRow.addView(txtCell2);
+                            }
+
+                        });
+
+                        tableParams = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.MATCH_PARENT);
+                        tableParams.weight=1;
+                        if(tableLayout != null && tableRow != null){
+                            tableLayout.addView(tableRow);
+                        }
+
+                    }
+                });
+
+            }
+        });
+
+    }
+
+    public void borrarTabla() {
+        Integer ultimo = tableLayout.getChildCount();
+        for(int j=ultimo-1;j>=1;j--){
+            tableLayout.removeViewAt(j);
+        }
+    }
 }
 
 
