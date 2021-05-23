@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
@@ -119,6 +120,11 @@ public class FormularioExamenFragmento extends Fragment {
                 listAs.addAll(Asignaturas);
                 mSpinner.setAdapter(new ArrayAdapter<String>(getActivity(),R.layout.support_simple_spinner_dropdown_item,listAs));
                 Log.d("Hora: ", Asignaturas.toString());
+
+                if (CalendarioFragmento.dia != null && CalendarioFragmento.mes != null && CalendarioFragmento.anio != null) {
+                    EditText fecha = rootView.findViewById(R.id.editTextDate);
+                    fecha.setText(CalendarioFragmento.dia+"/"+CalendarioFragmento.mes+"/"+CalendarioFragmento.anio);
+                }
 
                 btnCancelar = rootView.findViewById(R.id.btnCancel);
                 btnCancelar.setOnClickListener(new View.OnClickListener() {

@@ -2,6 +2,7 @@ package com.example.aplicacion;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -9,6 +10,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CalendarView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -25,6 +27,9 @@ public class CalendarioFragmento extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+
+    CalendarView cal;
+    public static Integer dia, mes, anio;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -69,14 +74,25 @@ public class CalendarioFragmento extends Fragment {
         // Inflate the layout for this fragment
 
         View rootView = inflater.inflate(R.layout.fragment_calendario_fragmento, container, false);
+
+        cal = rootView.findViewById(R.id.calendarView);
+        cal.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+            @Override
+            public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
+                dia = dayOfMonth;
+                mes = month + 1;
+                anio = year;
+            }
+        });
+
         FloatingActionButton agregar = rootView.findViewById(R.id.btnAnadirExamen);
         agregar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ConstraintLayout f1 = (ConstraintLayout) getActivity().findViewById(R.id.fragPerExam);
+                ConstraintLayout f1 = (ConstraintLayout) getActivity().findViewById(R.id.fragCalExam);
                 f1.removeAllViews();
                 FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
-                transaction.replace(R.id.fragPerExam, new FormularioExamenFragmento());
+                transaction.replace(R.id.fragCalExam, new FormularioExamenFragmento());
                 transaction.addToBackStack(null);
                 TextView textTitle = getActivity().findViewById(R.id.textTitle);
                 textTitle.setText("Examenes");
