@@ -29,6 +29,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -102,6 +103,7 @@ public class CalendarioFragmento extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_calendario_fragmento, container, false);
 
         cal = rootView.findViewById(R.id.calendarView);
+        cal.setFirstDayOfWeek(Calendar.MONDAY);
         cal.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
