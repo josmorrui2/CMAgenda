@@ -1,5 +1,6 @@
 package com.example.aplicacion;
 
+import android.app.DatePickerDialog;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -16,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -29,8 +31,12 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 import java.util.function.Consumer;
 
@@ -120,10 +126,34 @@ public class FormularioExamenFragmento extends Fragment {
                 listAs.addAll(Asignaturas);
                 mSpinner.setAdapter(new ArrayAdapter<String>(getActivity(),R.layout.support_simple_spinner_dropdown_item,listAs));
                 Log.d("Hora: ", Asignaturas.toString());
+                EditText txtFecha = rootView.findViewById(R.id.editTextDate);
+                txtFecha.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        final Calendar calendar = Calendar.getInstance();
+                        DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker datePicker, int year, int mes, int dia) {
+                                Calendar calendarResultado = Calendar.getInstance();
+                                calendarResultado.set(Calendar.YEAR,year);
+                                calendarResultado.set(Calendar.MONTH,mes);
+                                calendarResultado.set(Calendar.DAY_OF_MONTH,dia);
+                                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+                                Date date = calendarResultado.getTime();
+                                String fechaExamen = simpleDateFormat.format(date);
+                                txtFecha.setText(fechaExamen);
+
+                            }
+                        },calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH));
+                        datePickerDialog.show();
+                    }
+                });
 
                 if (CalendarioFragmento.dia != null && CalendarioFragmento.mes != null && CalendarioFragmento.anio != null) {
-                    EditText fecha = rootView.findViewById(R.id.editTextDate);
-                    fecha.setText(CalendarioFragmento.dia+"/"+CalendarioFragmento.mes+"/"+CalendarioFragmento.anio);
+                    txtFecha.setText(CalendarioFragmento.dia+"/"+CalendarioFragmento.mes+"/"+CalendarioFragmento.anio);
+                }
+                else if(CalendarioFragmento.fecha != null) {
+                    txtFecha.setText(CalendarioFragmento.fecha);
                 }
 
                 btnCancelar = rootView.findViewById(R.id.btnCancel);
