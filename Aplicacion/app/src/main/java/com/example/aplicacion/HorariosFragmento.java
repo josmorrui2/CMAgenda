@@ -205,51 +205,57 @@ public class HorariosFragmento extends Fragment {
 
             public void onClick(View v) {
                 Integer ultimo = tableLayout.getChildCount();
+
                 for (int i = 1; i < ultimo; i++) {
                     View parentRow = tableLayout.getChildAt(i);
-                    String horaH = "";
-                    Map<String,Object> mapAsig = new HashMap<>();
-                    for(int j=0; j<7;j++){
 
-                        switch (j){
-                            case 0:
-                                horaH = ((TextView) ((TableRow) parentRow).getChildAt(j)).getText().toString();
-                                Log.d("Hora: ", horaH);
-                                break;
-                            case 1:
-                                String text1 = ((TextView) ((TableRow) parentRow).getChildAt(j)).getText().toString();
-                                Log.d("text1: ", text1);
-                                mapAsig.put("1Lunes",text1);
-                                break;
-                            case 2:
-                                String text2 = ((TextView) ((TableRow) parentRow).getChildAt(j)).getText().toString();
-                                Log.d("text2: ", text2);
-                                mapAsig.put("2Martes",text2);
-                                break;
-                            case 3:
-                                String text3 = ((TextView) ((TableRow) parentRow).getChildAt(j)).getText().toString();
-                                Log.d("text3: ", text3);
-                                mapAsig.put("3Miercoles",text3);
-                                break;
-                            case 4:
-                                String text4 = ((TextView) ((TableRow) parentRow).getChildAt(j)).getText().toString();
-                                Log.d("text4: ", text4);
-                                mapAsig.put("4Jueves",text4);
-                                break;
-                            case 5:
-                                String text5 = ((TextView) ((TableRow) parentRow).getChildAt(j)).getText().toString();
-                                Log.d("text5: ", text5);
-                                mapAsig.put("5Viernes",text5);
-                                break;
-                            default:
-                                mapHora.put(horaH,mapAsig);
-                                break;
+                    String horaVacia = ((TextView) ((TableRow) parentRow).getChildAt(0)).getText().toString();
+                    if(!horaVacia.equals("")){
+                        String horaH = "";
+                        Map<String,Object> mapAsig = new HashMap<>();
+                        for(int j=0; j<7;j++){
+
+                            switch (j){
+                                case 0:
+                                    horaH = ((TextView) ((TableRow) parentRow).getChildAt(j)).getText().toString();
+                                    Log.d("Hora: ", horaH);
+                                    break;
+                                case 1:
+                                    String text1 = ((TextView) ((TableRow) parentRow).getChildAt(j)).getText().toString();
+                                    Log.d("text1: ", text1);
+                                    mapAsig.put("1Lunes",text1);
+                                    break;
+                                case 2:
+                                    String text2 = ((TextView) ((TableRow) parentRow).getChildAt(j)).getText().toString();
+                                    Log.d("text2: ", text2);
+                                    mapAsig.put("2Martes",text2);
+                                    break;
+                                case 3:
+                                    String text3 = ((TextView) ((TableRow) parentRow).getChildAt(j)).getText().toString();
+                                    Log.d("text3: ", text3);
+                                    mapAsig.put("3Miercoles",text3);
+                                    break;
+                                case 4:
+                                    String text4 = ((TextView) ((TableRow) parentRow).getChildAt(j)).getText().toString();
+                                    Log.d("text4: ", text4);
+                                    mapAsig.put("4Jueves",text4);
+                                    break;
+                                case 5:
+                                    String text5 = ((TextView) ((TableRow) parentRow).getChildAt(j)).getText().toString();
+                                    Log.d("text5: ", text5);
+                                    mapAsig.put("5Viernes",text5);
+                                    break;
+                                default:
+                                    mapHora.put(horaH,mapAsig);
+                                    break;
+
+                            }
 
                         }
-
+                        Log.d("mapAsig: ", mapAsig.toString());
+                        Log.d("mapHora: ", mapHora.toString());
                     }
-                    Log.d("mapAsig: ", mapAsig.toString());
-                    Log.d("mapHora: ", mapHora.toString());
+
                 }
 
                 mDatabase.child("Horario").child(userId).setValue(mapHora).addOnCompleteListener(new OnCompleteListener<Void>() {

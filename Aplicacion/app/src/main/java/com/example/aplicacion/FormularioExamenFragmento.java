@@ -23,6 +23,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -35,8 +36,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Set;
 import java.util.function.Consumer;
 
@@ -170,10 +173,61 @@ public class FormularioExamenFragmento extends Fragment {
                         transaction.commit();
                     }
                 });
+
+
+
             }
 
         });
+        btnGuardar = (Button) rootView.findViewById(R.id.btnSave);
+        btnGuardar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Spinner asignatura = (Spinner) getActivity().findViewById(R.id.spAsignatura);
+                String asig = asignatura.getSelectedItem().toString();
+
+                EditText fechaEx = (EditText) getActivity().findViewById(R.id.editTextDate);
+                String fech = fechaEx.getText().toString();
+
+                EditText horaEx = (EditText) getActivity().findViewById(R.id.editTextTime);
+                String hour = horaEx.getText().toString();
+
+                EditText descripcionEx = (EditText) getActivity().findViewById(R.id.editTextTextMultiLine);
+                String descr = descripcionEx.getText().toString();
+
+                if(!asig.isEmpty() && !fech.isEmpty() && !hour.isEmpty() && !descr.isEmpty()){
+                    registroExamen(asig,fech,hour,descr);
+                }
+
+            }
+        });
 
         return rootView;
+    }
+
+    public void registroExamen(String asig,String fech,String hour,String descr){
+        Map<String,Object> map = new HashMap<>();
+        map.put("fecha",fech);
+        map.put("hora",hour);
+        map.put("descripcion",descr);
+
+        mDatabase.child("Exams").child(userId).child(asig).setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(task.isSuccessful()){
+                    LinearLayout f1 = getActivity().findViewById(R.id.fragFormExam);
+                    f1.removeAllViews();
+                    FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+                    transaction.replace(R.id.fragFormExam, new ExamenesFragmento());
+                    transaction.addToBackStack(null);
+                    TextView textTitle = getActivity().findViewById(R.id.textTitle);
+                    textTitle.setText("Examenes");
+                    transaction.commit();
+
+                }else{
+                    Toast.makeText(getActivity(), "No se pudieron crear los datos correctamente", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 }

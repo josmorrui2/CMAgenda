@@ -26,8 +26,12 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.function.Consumer;
 
 /**
@@ -114,7 +118,7 @@ public class ExamenesFragmento extends Fragment {
         });
         List<String> listaaux = new ArrayList<>();
         listaaux.add("fecha");listaaux.add("hora");
-        mDatabase.child("examenes").child(userId).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+        mDatabase.child("Exams").child(userId).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
@@ -138,24 +142,42 @@ public class ExamenesFragmento extends Fragment {
 
         for(int j=0;j<listaMat.size();j++) {
             final String[] exa = {"Examen de " + listaMat.get(j) + " el día "};
+            final Boolean[] finalB = {true};
             for (int i = 0; i < listaaux.size(); i++) {
                 int finalI = i;
 
-                mDatabase.child("examenes").child(userId).child(listaMat.get(j)).child(listaaux.get(i)).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                mDatabase.child("Exams").child(userId).child(listaMat.get(j)).child(listaaux.get(i)).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<DataSnapshot> task) {
                         if(task.getResult().getValue() != null){
 
                             exa[0] += task.getResult().getValue().toString();
+
                             if (finalI == 0) {
-                                exa[0] += " a las ";
+                                try {
+                                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+                                    Date date = new Date();
+                                    String fechaActual = simpleDateFormat.format(date);
+                                    SimpleDateFormat date1 = new SimpleDateFormat("dd/MM/yyyy");
+                                    SimpleDateFormat date2 = new SimpleDateFormat("dd/MM/yyyy");
+                                    if(date2.parse(task.getResult().getValue().toString()).after(date1.parse(fechaActual))){
+                                        exa[0] += " a las ";
+                                    }else{
+                                        finalB[0] =false;
+                                    }
+                                } catch (ParseException e) {
+                                    e.printStackTrace();
+                                }
+
                             } else {
-                                listData.add(exa[0]);
-                                mAdapter = new ArrayAdapter<String>(getActivity(), R.layout.support_simple_spinner_dropdown_item, listData);
-                                mListView.setAdapter(mAdapter);
+
+                                if(finalB[0]){
+                                    listData.add(exa[0]);
+                                    mAdapter = new ArrayAdapter<String>(getActivity(), R.layout.support_simple_spinner_dropdown_item, listData);
+                                    mListView.setAdapter(mAdapter);
+                                }
                             }
                             Log.d("RESULTADO: ", task.getResult().getValue().toString());
-
                         }
 
                     }
