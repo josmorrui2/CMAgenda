@@ -164,7 +164,8 @@ public class ExamenesFragmento extends Fragment {
                                         String fechaActual = simpleDateFormat.format(date);
                                         SimpleDateFormat date1 = new SimpleDateFormat("dd/MM/yyyy");
                                         SimpleDateFormat date2 = new SimpleDateFormat("dd/MM/yyyy");
-                                        if (date2.parse(task.getResult().getValue().toString()).after(date1.parse(fechaActual))) {
+                                        if (date2.parse(task.getResult().getValue().toString()).after(date1.parse(fechaActual))
+                                                || date2.parse(task.getResult().getValue().toString()).equals(date1.parse(fechaActual))) {
                                             exa[0] += " a las ";
                                         } else {
                                             finalB[0] = false;

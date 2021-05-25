@@ -105,20 +105,6 @@ public class CalendarioFragmento extends Fragment {
 
         cal = rootView.findViewById(R.id.calendarView);
         cal.setFirstDayOfWeek(Calendar.MONDAY);
-        cal.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
-            @Override
-            public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
-                dia = dayOfMonth;
-                mes = month + 1;
-                anio = year;
-            }
-        });
-        if (dia == null && mes == null && anio == null) {
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
-            Date date = new Date();
-
-            fecha = simpleDateFormat.format(date);
-        }
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
@@ -137,7 +123,24 @@ public class CalendarioFragmento extends Fragment {
 
                     }
                 });
-                funcion1(listaMat,listaaux);
+                cal.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+                    @Override
+                    public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
+                        dia = dayOfMonth;
+                        mes = month + 1;
+                        anio = year;
+                        fecha = dia.toString()+"/"+mes.toString()+"/"+anio.toString();
+                        funcion1(fecha,listaMat,listaaux);
+
+                    }
+                });
+
+                if (dia == null && mes == null && anio == null) {
+                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+                    Date date = new Date();
+                    fecha = simpleDateFormat.format(date);
+                }
+                funcion1(fecha,listaMat,listaaux);
 
             }
         });
@@ -161,8 +164,8 @@ public class CalendarioFragmento extends Fragment {
         return rootView;
     }
 
-    public void funcion1(List<String> listaMat, List<String> listaaux){
-
+    public void funcion1(String fecha,List<String> listaMat, List<String> listaaux){
+        listData = new ArrayList<String>();
         for(int j=0;j<listaMat.size();j++) {
             final String[] exa = {"Examen de "};
             final Boolean[] finalB = {true};
@@ -179,12 +182,12 @@ public class CalendarioFragmento extends Fragment {
                                 exa[0] += task.getResult().getValue().toString();
                                 if (finalI == 1) {
                                     try {
-                                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
-                                        Date date = new Date();
-                                        String fechaActual = simpleDateFormat.format(date);
+
                                         SimpleDateFormat date1 = new SimpleDateFormat("dd/MM/yyyy");
                                         SimpleDateFormat date2 = new SimpleDateFormat("dd/MM/yyyy");
-                                        if (date2.parse(task.getResult().getValue().toString()).after(date1.parse(fechaActual))) {
+                                        Log.d("fecha: ", fecha);
+                                        if (date2.parse(task.getResult().getValue().toString()).equals(date1.parse(fecha))) {
+                                            Log.d("fecha1: ", fecha);
                                             exa[0] += " a las ";
                                         } else {
                                             finalB[0] = false;
@@ -198,6 +201,10 @@ public class CalendarioFragmento extends Fragment {
                                     if (finalB[0]) {
                                         listData.add(exa[0]);
                                         mAdapter = new ArrayAdapter<String>(getActivity(), R.layout.support_simple_spinner_dropdown_item, listData);
+                                        mListView.setAdapter(mAdapter);
+                                    }
+                                    if (listData.isEmpty()){
+                                        mAdapter = new ArrayAdapter<String>(getActivity(), R.layout.support_simple_spinner_dropdown_item, new ArrayList<String>());
                                         mListView.setAdapter(mAdapter);
                                     }
                                 }
