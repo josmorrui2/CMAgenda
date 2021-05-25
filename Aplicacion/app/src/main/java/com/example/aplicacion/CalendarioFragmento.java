@@ -27,6 +27,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -123,9 +124,8 @@ public class CalendarioFragmento extends Fragment {
 
         mListView = rootView.findViewById(R.id.listCalendar);
         List<String> listaaux = new ArrayList<>();
-        listaaux.add("fecha");
-        listaaux.add("hora");
-        mDatabase.child("examenes").child(userId).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+        listaaux.add("asignatura");listaaux.add("fecha");listaaux.add("hora");
+        mDatabase.child("Exams").child(userId).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
@@ -164,22 +164,43 @@ public class CalendarioFragmento extends Fragment {
     public void funcion1(List<String> listaMat, List<String> listaaux){
 
         for(int j=0;j<listaMat.size();j++) {
-            final String[] exa = {"Examen de " + listaMat.get(j)};
+            final String[] exa = {"Examen de "};
+            final Boolean[] finalB = {true};
             for (int i = 0; i < listaaux.size(); i++) {
                 int finalI = i;
 
-                mDatabase.child("examenes").child(userId).child(listaMat.get(j)).child(listaaux.get(i)).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                mDatabase.child("Exams").child(userId).child(listaMat.get(j)).child(listaaux.get(i)).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<DataSnapshot> task) {
                         if(task.getResult().getValue() != null){
+                            if(finalI == 0){
+                                exa[0] += task.getResult().getValue().toString() + " el día ";
+                            }else {
+                                exa[0] += task.getResult().getValue().toString();
+                                if (finalI == 1) {
+                                    try {
+                                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+                                        Date date = new Date();
+                                        String fechaActual = simpleDateFormat.format(date);
+                                        SimpleDateFormat date1 = new SimpleDateFormat("dd/MM/yyyy");
+                                        SimpleDateFormat date2 = new SimpleDateFormat("dd/MM/yyyy");
+                                        if (date2.parse(task.getResult().getValue().toString()).after(date1.parse(fechaActual))) {
+                                            exa[0] += " a las ";
+                                        } else {
+                                            finalB[0] = false;
+                                        }
+                                    } catch (ParseException e) {
+                                        e.printStackTrace();
+                                    }
 
-                            exa[0] += task.getResult().getValue().toString();
-                            if (finalI == 0) {
-                                exa[0] += " a las ";
-                            } else {
-                                listData.add(exa[0]);
-                                mAdapter = new ArrayAdapter<String>(getActivity(), R.layout.support_simple_spinner_dropdown_item, listData);
-                                mListView.setAdapter(mAdapter);
+                                } else {
+
+                                    if (finalB[0]) {
+                                        listData.add(exa[0]);
+                                        mAdapter = new ArrayAdapter<String>(getActivity(), R.layout.support_simple_spinner_dropdown_item, listData);
+                                        mListView.setAdapter(mAdapter);
+                                    }
+                                }
                             }
                             Log.d("RESULTADO: ", task.getResult().getValue().toString());
 

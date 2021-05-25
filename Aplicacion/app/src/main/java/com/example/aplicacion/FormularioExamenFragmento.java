@@ -53,6 +53,7 @@ public class FormularioExamenFragmento extends Fragment {
     String userId;
     DatabaseReference mDatabase;
     Button btnCancelar, btnGuardar;
+    EditText nombreTitulo;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -183,6 +184,10 @@ public class FormularioExamenFragmento extends Fragment {
         btnGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                nombreTitulo = (EditText) getActivity().findViewById(R.id.editTextTextPersonName);
+                String ntit = nombreTitulo.getText().toString();
+
                 Spinner asignatura = (Spinner) getActivity().findViewById(R.id.spAsignatura);
                 String asig = asignatura.getSelectedItem().toString();
 
@@ -195,8 +200,8 @@ public class FormularioExamenFragmento extends Fragment {
                 EditText descripcionEx = (EditText) getActivity().findViewById(R.id.editTextTextMultiLine);
                 String descr = descripcionEx.getText().toString();
 
-                if(!asig.isEmpty() && !fech.isEmpty() && !hour.isEmpty() && !descr.isEmpty()){
-                    registroExamen(asig,fech,hour,descr);
+                if(!ntit.isEmpty() && !asig.isEmpty() && !fech.isEmpty() && !hour.isEmpty() && !descr.isEmpty()){
+                    registroExamen(ntit,asig,fech,hour,descr);
                 }
 
             }
@@ -205,13 +210,14 @@ public class FormularioExamenFragmento extends Fragment {
         return rootView;
     }
 
-    public void registroExamen(String asig,String fech,String hour,String descr){
+    public void registroExamen(String ntit, String asig,String fech,String hour,String descr){
         Map<String,Object> map = new HashMap<>();
+        map.put("asignatura",asig);
         map.put("fecha",fech);
         map.put("hora",hour);
         map.put("descripcion",descr);
 
-        mDatabase.child("Exams").child(userId).child(asig).setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
+        mDatabase.child("Exams").child(userId).child(ntit).setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if(task.isSuccessful()){

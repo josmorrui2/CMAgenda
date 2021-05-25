@@ -117,7 +117,7 @@ public class ExamenesFragmento extends Fragment {
             }
         });
         List<String> listaaux = new ArrayList<>();
-        listaaux.add("fecha");listaaux.add("hora");
+        listaaux.add("asignatura");listaaux.add("fecha");listaaux.add("hora");
         mDatabase.child("Exams").child(userId).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
@@ -141,7 +141,7 @@ public class ExamenesFragmento extends Fragment {
     public void funcion1(List<String> listaMat, List<String> listaaux){
 
         for(int j=0;j<listaMat.size();j++) {
-            final String[] exa = {"Examen de " + listaMat.get(j) + " el día "};
+            final String[] exa = {"Examen de "};
             final Boolean[] finalB = {true};
             for (int i = 0; i < listaaux.size(); i++) {
                 int finalI = i;
@@ -151,30 +151,35 @@ public class ExamenesFragmento extends Fragment {
                     public void onComplete(@NonNull Task<DataSnapshot> task) {
                         if(task.getResult().getValue() != null){
 
-                            exa[0] += task.getResult().getValue().toString();
+                            if(finalI == 0){
+                                exa[0] += task.getResult().getValue().toString() + " el día ";
+                            }else {
+                                exa[0] += task.getResult().getValue().toString();
 
-                            if (finalI == 0) {
-                                try {
-                                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
-                                    Date date = new Date();
-                                    String fechaActual = simpleDateFormat.format(date);
-                                    SimpleDateFormat date1 = new SimpleDateFormat("dd/MM/yyyy");
-                                    SimpleDateFormat date2 = new SimpleDateFormat("dd/MM/yyyy");
-                                    if(date2.parse(task.getResult().getValue().toString()).after(date1.parse(fechaActual))){
-                                        exa[0] += " a las ";
-                                    }else{
-                                        finalB[0] =false;
+
+                                if (finalI == 1) {
+                                    try {
+                                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+                                        Date date = new Date();
+                                        String fechaActual = simpleDateFormat.format(date);
+                                        SimpleDateFormat date1 = new SimpleDateFormat("dd/MM/yyyy");
+                                        SimpleDateFormat date2 = new SimpleDateFormat("dd/MM/yyyy");
+                                        if (date2.parse(task.getResult().getValue().toString()).after(date1.parse(fechaActual))) {
+                                            exa[0] += " a las ";
+                                        } else {
+                                            finalB[0] = false;
+                                        }
+                                    } catch (ParseException e) {
+                                        e.printStackTrace();
                                     }
-                                } catch (ParseException e) {
-                                    e.printStackTrace();
-                                }
 
-                            } else {
+                                } else {
 
-                                if(finalB[0]){
-                                    listData.add(exa[0]);
-                                    mAdapter = new ArrayAdapter<String>(getActivity(), R.layout.support_simple_spinner_dropdown_item, listData);
-                                    mListView.setAdapter(mAdapter);
+                                    if (finalB[0]) {
+                                        listData.add(exa[0]);
+                                        mAdapter = new ArrayAdapter<String>(getActivity(), R.layout.support_simple_spinner_dropdown_item, listData);
+                                        mListView.setAdapter(mAdapter);
+                                    }
                                 }
                             }
                             Log.d("RESULTADO: ", task.getResult().getValue().toString());
