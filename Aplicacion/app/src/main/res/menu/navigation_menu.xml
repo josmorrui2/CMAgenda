@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item
-        android:id="@+id/menuPerfil"
-        android:icon="@drawable/profile"
-        android:title="@string/perfil" />
-
-    <item
-        android:id="@+id/menuHorario"
-        android:icon="@drawable/horario"
-        android:title="@string/horario" />
-
-    <item
-        android:id="@+id/menuExamenes"
-        android:icon="@drawable/examenes"
-        android:title="@string/examenes" />
-
-
-
-    <item
-        android:id="@+id/menuCalendario"
-        android:icon="@drawable/calendario"
-        android:title="@string/calendario" />
-
-
-    <item android:title="@string/otros">
+    <item android:title="">
 
         <menu>
+
+            <item
+                android:id="@+id/menuPerfil"
+                android:icon="@drawable/profile"
+                android:title="@string/perfil" />
+
+            <item
+                android:id="@+id/menuHorario"
+                android:icon="@drawable/horario"
+                android:title="@string/horario" />
+
+            <item
+                android:id="@+id/menuExamenes"
+                android:icon="@drawable/examenes"
+                android:title="@string/examenes" />
+
+
+
+            <item
+                android:id="@+id/menuCalendario"
+                android:icon="@drawable/calendario"
+                android:title="@string/calendario" />
+
             <item
                 android:id="@+id/menuAjustes"
                 android:icon="@drawable/settings"
