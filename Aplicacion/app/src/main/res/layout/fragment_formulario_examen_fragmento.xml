@@ -82,6 +82,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="#c3d5d6"
                 android:text="Cancelar" />
 
             <Space
@@ -94,6 +95,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="#c3d5d6"
                 android:text="Guardar" />
         </LinearLayout>
     </LinearLayout>

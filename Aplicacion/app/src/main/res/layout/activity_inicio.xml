@@ -5,6 +5,7 @@
     android:id="@+id/drawerLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/fondo"
     tools:context=".InicioActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -15,7 +16,7 @@
             android:id="@+id/LayoutToolBar"
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
-            android:background="#8fa8ae"
+            android:background="#627d7d"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:paddingStart="15dp"

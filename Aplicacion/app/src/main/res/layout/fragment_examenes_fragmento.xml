@@ -7,24 +7,36 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:id="@+id/fragPerExam"
+    android:background="@drawable/fondo"
     tools:context=".ExamenesFragmento">
 
     <TextView
-        android:id="@+id/title_exams"
-        android:layout_width="match_parent"
-        android:layout_height="64dp"
-        android:background="#154360 "
-        android:text="Tus exámenes"
+        android:id="@+id/proximosExamenes"
+
+        android:layout_width="362dp"
         android:layout_gravity="center"
-        android:textAlignment="center"
-        android:textAllCaps="true"
-        android:textColor="@color/colorWhite"
-        android:textSize="30sp" />
+        android:layout_margin="10dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/bad_script"
+        android:gravity="center"
+        android:shadowColor="#67787E"
+        android:shadowDx="4"
+        android:shadowDy="4"
+        android:shadowRadius="4"
+        android:text="Próximos exámenes"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display3"
+        android:textColor="#FAF4F4"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        tools:text="Próximos exámenes" />
 
     <ListView
         android:id="@+id/lista"
-        android:layout_width="match_parent"
+        android:layout_width="362dp"
         android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:background="#8FD8EBF4"
         android:headerDividersEnabled="true" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

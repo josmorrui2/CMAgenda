@@ -16,9 +16,10 @@
 
         <CalendarView
             android:id="@+id/calendarView"
-            android:firstDayOfWeek="2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:firstDayOfWeek="2"
+            android:selectedWeekBackgroundColor="#FFFFFF"
             app:layout_constraintTop_toBottomOf="@+id/layoutToolBar" />
 
     </LinearLayout>
@@ -48,7 +49,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:text="EXAMENES"
-            android:textColor="@color/purple_500"
+            android:textColor="#78898a "
             android:textSize="18dp"
             android:textStyle="bold" />
 
@@ -91,6 +92,8 @@
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="16dp"
+        android:background="#c3d5d6"
+        app:backgroundTint="#c3d5d6"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@android:drawable/ic_input_add" />
