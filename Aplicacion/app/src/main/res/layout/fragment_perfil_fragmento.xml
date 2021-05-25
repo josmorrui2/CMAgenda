@@ -48,12 +48,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center_vertical|left|start"
+            android:gravity="center_vertical|end"
             android:shadowColor="#67787E"
             android:text="nombre"
             android:textColor="#154360"
             android:textSize="14sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:paddingRight="16dp" />
     </LinearLayout>
 
     <LinearLayout
@@ -89,13 +90,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-
-            android:gravity="center_vertical|left|start"
+            android:gravity="center_vertical|end"
             android:shadowColor="#67787E"
             android:text="apellidos"
             android:textColor="#154360"
             android:textSize="14sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:paddingRight="16dp" />
 
 
     </LinearLayout>
@@ -133,13 +134,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-
-            android:gravity="center_vertical|left|start"
+            android:gravity="center_vertical|end"
             android:shadowColor="#67787E"
             android:text="email"
             android:textColor="#154360"
             android:textSize="14sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:paddingRight="16dp" />
 
     </LinearLayout>
 
@@ -156,7 +157,6 @@
         android:gravity="center"
         android:orientation="horizontal">
 
-
         <TextView
             android:layout_width="139dp"
             android:layout_height="wrap_content"
@@ -169,22 +169,20 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Display3"
             android:textColor="#154360"
             android:textSize="14sp"
-            android:textStyle="bold"
-
-            />
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/fechaNacimientoPerfil"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-
-            android:gravity="center_vertical|left|start"
+            android:gravity="center_vertical|end"
             android:shadowColor="#67787E"
             android:text="Fecha de Nacimiento"
             android:textColor="#154360"
             android:textSize="14sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:paddingRight="16dp" />
 
     </LinearLayout>
 
@@ -195,7 +193,6 @@
         android:layout_below="@id/control4"
         android:layout_alignStart="@+id/control4"
         android:layout_alignLeft="@+id/control4"
-        android:layout_alignTop="@+id/signUpButton"
         android:layout_alignEnd="@+id/control4"
         android:layout_alignRight="@+id/control4"
         android:layout_alignParentStart="true"

@@ -19,67 +19,68 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:firstDayOfWeek="2"
+            android:background="#8FD8EBF4"
             android:selectedWeekBackgroundColor="#FFFFFF"
             app:layout_constraintTop_toBottomOf="@+id/layoutToolBar" />
 
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:id="@+id/lytExamenes"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lytCalendario">
-
-        <View
-            android:id="@+id/divider1"
+        <LinearLayout
+            android:id="@+id/lytExamenes"
             android:layout_width="match_parent"
-            android:layout_height="5dp"
-            android:background="?android:attr/listDivider" />
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lytCalendario">
 
-        <TextView
-            android:id="@+id/txtExamenes"
-            android:layout_width="wrap_content"
+            <View
+                android:id="@+id/divider1"
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:background="?android:attr/listDivider" />
+
+            <TextView
+                android:id="@+id/txtExamenes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="EXAMENES"
+                android:textColor="#78898a "
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+            <View
+                android:id="@+id/divider2"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?android:attr/listDivider" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lytDetalleExamenes"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:text="EXAMENES"
-            android:textColor="#78898a "
-            android:textSize="18dp"
-            android:textStyle="bold" />
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lytExamenes">
 
-        <View
-            android:id="@+id/divider2"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="?android:attr/listDivider" />
+            <ListView
+                android:id="@+id/listCalendar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#8FD8EBF4"
+                android:headerDividersEnabled="true" />
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/lytDetalleExamenes"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lytExamenes">
-
-        <ListView
-            android:id="@+id/listCalendar"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:headerDividersEnabled="true" />
+        </LinearLayout>
 
     </LinearLayout>
 
