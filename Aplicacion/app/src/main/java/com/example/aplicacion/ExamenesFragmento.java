@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -105,7 +106,7 @@ public class ExamenesFragmento extends Fragment {
         agregar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                LinearLayout f1 = (LinearLayout) getActivity().findViewById(R.id.fragPerExam);
+                ConstraintLayout f1 = getActivity().findViewById(R.id.fragPerExam);
                 f1.removeAllViews();
                 FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
                 transaction.replace(R.id.fragPerExam, new FormularioExamenFragmento());
